@@ -21,8 +21,8 @@ const BeanCard = ({ bean }: Props) => {
         <Heading size="md">{bean.name}</Heading>
       </CardHeader>
 
-      <CardBody>
-        <Stack divider={<StackDivider />} spacing="4">
+      <CardBody display="flex">
+        <Stack divider={<StackDivider />} spacing="4" flex={1} mr={4}>
           <Box>
             <Heading size="xs" textTransform="uppercase">
               Country
@@ -48,6 +48,14 @@ const BeanCard = ({ bean }: Props) => {
             </Text>
           </Box>
         </Stack>
+        <Box flex={1} mr={4}>
+          <Heading size="xs" textTransform="uppercase">
+            Note
+          </Heading>
+          <Text pt="2" fontSize="sm">
+            {bean.note}
+          </Text>
+        </Box>
       </CardBody>
     </Card>
   );

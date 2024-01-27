@@ -22,7 +22,10 @@ import SearchInput from "./SearchInput";
 import HamburgerIcon from "./HamburgerIcon";
 import PlusIcon from "./PlusIcon";
 
-const HeaderGrid = () => {
+interface Props {
+  onSearch: (searchText: string) => void;
+}
+const HeaderGrid = ({ onSearch }: Props) => {
   const bg = useColorModeValue("white", "gray.800");
   const { colorMode, toggleColorMode } = useColorMode();
   return (
@@ -50,7 +53,7 @@ const HeaderGrid = () => {
       </GridItem>
       <GridItem>
         <HStack h="4.5rem" justifyContent="space-between">
-          <SearchInput onSearch={() => {}} />
+          <SearchInput onSearch={onSearch} />
           <Show above="sm">
             <Stack direction="row" spacing={4}>
               <AddButton />

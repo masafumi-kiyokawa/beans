@@ -6,7 +6,7 @@ interface Props {
 }
 
 const BeansCardContainer = ({ children }: Props) => {
-  return <Box margin={5}>{children}</Box>;
+  return <Box m={5}>{children}</Box>;
 };
 
 export default BeansCardContainer;
