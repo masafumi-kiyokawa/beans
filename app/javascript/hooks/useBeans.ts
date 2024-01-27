@@ -1,9 +1,16 @@
 import { useEffect, useState } from "react";
 import axios, { CanceledError } from "axios";
 
-interface Bean {
+export interface Bean {
   id: string;
   name: string;
+  country: string;
+  variety: string;
+  process: string;
+  producer: string;
+  roaster: string;
+  roast_level: string;
+  note: string;
 }
 
 const useBeans = () => {
