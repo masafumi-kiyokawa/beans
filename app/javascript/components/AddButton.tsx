@@ -1,10 +1,11 @@
 import { Button } from "@chakra-ui/react";
 import BeanIcon from "./BeanIcon";
+import PlusIcon from "./PlusIcon";
 
 const AddButton = () => {
   return (
     <Button
-      leftIcon={<BeanIcon w={4} h={4} />}
+      leftIcon={<PlusIcon />}
       colorScheme="gray"
       variant="outline"
       boxShadow="base"
