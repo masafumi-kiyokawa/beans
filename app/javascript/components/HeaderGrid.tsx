@@ -1,3 +1,5 @@
+import React from "react";
+import type { ReactNode } from "react";
 import {
   Center,
   Grid,
@@ -25,7 +27,7 @@ import PlusIcon from "./PlusIcon";
 interface Props {
   onSearch: (searchText: string) => void;
 }
-const HeaderGrid = ({ onSearch }: Props) => {
+const HeaderGrid = ({ onSearch }: Props): ReactNode => {
   const bg = useColorModeValue("white", "gray.800");
   const { colorMode, toggleColorMode } = useColorMode();
   return (
@@ -39,7 +41,7 @@ const HeaderGrid = ({ onSearch }: Props) => {
       top={0}
       left={0}
       right={0}
-      zIndex={9999}
+      zIndex={1}
       w="full"
       bg={bg}
     >

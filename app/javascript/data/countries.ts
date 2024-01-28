@@ -1,4 +1,4 @@
-// Obtained JSON from　　https://gist.github.com/keeguon/2310008
+// Obtained JSON from　 "https://gist.github.com/keeguon/2310008"
 export default [
   { name: "Afghanistan", code: "AF" },
   { name: "Åland Islands", code: "AX" },

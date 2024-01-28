@@ -1,4 +1,4 @@
-import { BeanQuery } from "../App";
+import type { BeanQuery } from "../App";
 import useData from "./useData";
 
 export interface Bean {

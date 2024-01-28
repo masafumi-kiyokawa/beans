@@ -1,3 +1,5 @@
+import React from "react";
+import type { ReactNode } from "react";
 import {
   Box,
   Card,
@@ -8,13 +10,13 @@ import {
   StackDivider,
   Text,
 } from "@chakra-ui/react";
-import { Bean } from "../hooks/useBeans";
+import type { Bean } from "../hooks/useBeans";
 
 interface Props {
   bean: Bean;
 }
 
-const BeanCard = ({ bean }: Props) => {
+const BeanCard = ({ bean }: Props): ReactNode => {
   return (
     <Card>
       <CardHeader>

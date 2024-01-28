@@ -1,12 +1,13 @@
-import { Center, Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
-import { useRef } from "react";
+import React, { useRef } from "react";
+import type { ReactNode } from "react";
+import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
 import { BsSearch } from "react-icons/bs";
 
 interface Props {
   onSearch: (searchText: string) => void;
 }
 
-const SearchInput = ({ onSearch }: Props) => {
+const SearchInput = ({ onSearch }: Props): ReactNode => {
   const ref = useRef<HTMLInputElement>(null);
 
   return (
@@ -17,7 +18,9 @@ const SearchInput = ({ onSearch }: Props) => {
       }}
     >
       <InputGroup>
-        <InputLeftElement children={<BsSearch />} />
+        <InputLeftElement>
+          <BsSearch />
+        </InputLeftElement>
         <Input
           ref={ref}
           placeholder="Search beans..."

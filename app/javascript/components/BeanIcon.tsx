@@ -1,3 +1,5 @@
+import React from "react";
+import type { ReactNode } from "react";
 import { Icon } from "@chakra-ui/react";
 import { BiSolidCoffeeBean } from "react-icons/bi";
 
@@ -6,7 +8,7 @@ interface Props {
   h: number;
 }
 
-const BeanIcon = ({ w, h }: Props) => {
+const BeanIcon = ({ w, h }: Props): ReactNode => {
   return <Icon as={BiSolidCoffeeBean} w={w} h={h} />;
 };
 

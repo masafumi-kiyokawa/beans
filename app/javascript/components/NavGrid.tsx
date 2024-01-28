@@ -1,4 +1,6 @@
 import { Box, Button, Flex, Heading } from "@chakra-ui/react";
+import React from "react";
+import type { ReactNode } from "react";
 import Scrollbar from "./Scrollbar";
 import { CircleFlag } from "react-circle-flags";
 import countries from "../data/countries";
@@ -8,12 +10,12 @@ interface Props {
   onSelectCountry: (country: string) => void;
 }
 
-const NavGrid = ({ selectedCountry, onSelectCountry }: Props) => {
+const NavGrid = ({ selectedCountry, onSelectCountry }: Props): ReactNode => {
   return (
     <Scrollbar>
       <Heading fontSize="lg">Countries</Heading>
       {countries.map((country) => (
-        <Flex my={4} align="center">
+        <Flex key={country.code} my={4} align="center">
           <Box h={8} w={8}>
             <CircleFlag countryCode={country.code.toLowerCase()} />
           </Box>
@@ -23,7 +25,9 @@ const NavGrid = ({ selectedCountry, onSelectCountry }: Props) => {
               textAlign="left"
               variant="link"
               fontWeight={country.name === selectedCountry ? "bold" : "nomal"}
-              onClick={() => onSelectCountry(country.name)}
+              onClick={(): void => {
+                onSelectCountry(country.name);
+              }}
             >
               {country.name}
             </Button>

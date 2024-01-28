@@ -1,6 +1,8 @@
-import { Card, CardBody, Skeleton, SkeletonText } from "@chakra-ui/react";
+import React from "react";
+import type { ReactNode } from "react";
+import { Card, CardBody, SkeletonText } from "@chakra-ui/react";
 
-const BeansCardSkeleton = () => {
+const BeansCardSkeleton = (): ReactNode => {
   return (
     <Card>
       <CardBody>

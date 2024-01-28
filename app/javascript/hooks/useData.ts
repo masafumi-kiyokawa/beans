@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import axios, { AxiosRequestConfig, CanceledError } from "axios";
+import type { AxiosRequestConfig } from "axios";
+import axios, { CanceledError } from "axios";
 
 interface FetchResponce<T> {
   count: number;
@@ -12,7 +13,7 @@ const useData = <T>(
   deps?: any[]
 ) => {
   const [data, setData] = useState<T[]>([]);
-  const [error, setError] = useState("");
+  const [error, setError] = useState<string | any>("");
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(
@@ -34,7 +35,9 @@ const useData = <T>(
           setIsLoading(false);
         });
 
-      return () => controller.abort();
+      return () => {
+        controller.abort();
+      };
     },
     deps ? [...deps] : []
   );
