@@ -44,4 +44,5 @@ const useData = <T>(
 
   return { data, error, isLoading };
 };
+
 export default useData;

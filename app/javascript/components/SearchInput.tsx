@@ -12,6 +12,7 @@ const SearchInput = ({ onSearch }: Props): ReactNode => {
 
   return (
     <form
+      className="search"
       onSubmit={(event) => {
         event.preventDefault();
         if (ref.current) onSearch(ref.current.value);

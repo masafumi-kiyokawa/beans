@@ -15,14 +15,16 @@ import {
   Stack,
   useColorMode,
   useColorModeValue,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { FaMoon, FaSun } from "react-icons/fa";
 import Logo from "./Logo";
-import AddButton from "./AddButton";
 import ColorModeSwitch from "./ColorModeSwitch";
 import SearchInput from "./SearchInput";
 import HamburgerIcon from "./HamburgerIcon";
 import PlusIcon from "./PlusIcon";
+import AddBeanButton from "./AddBeanButton";
+import AddBeanDrawer from "./AddBeanDrawer";
 
 interface Props {
   onSearch: (searchText: string) => void;
@@ -30,6 +32,7 @@ interface Props {
 const HeaderGrid = ({ onSearch }: Props): ReactNode => {
   const bg = useColorModeValue("white", "gray.800");
   const { colorMode, toggleColorMode } = useColorMode();
+  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Grid
       templateColumns="150px 1fr"
@@ -58,7 +61,7 @@ const HeaderGrid = ({ onSearch }: Props): ReactNode => {
           <SearchInput onSearch={onSearch} />
           <Show above="sm">
             <Stack direction="row" spacing={4}>
-              <AddButton />
+              <AddBeanButton />
             </Stack>
             <ColorModeSwitch />
           </Show>
@@ -71,7 +74,10 @@ const HeaderGrid = ({ onSearch }: Props): ReactNode => {
                 variant="outline"
               />
               <MenuList>
-                <MenuItem icon={<PlusIcon />}>Add Bean</MenuItem>
+                <MenuItem icon={<PlusIcon />} onClick={onOpen}>
+                  Add Bean
+                </MenuItem>
+                <AddBeanDrawer isOpen={isOpen} onClose={onClose} />
                 <MenuItem
                   icon={colorMode === "light" ? <FaMoon /> : <FaSun />}
                   onClick={toggleColorMode}

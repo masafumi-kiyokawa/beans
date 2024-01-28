@@ -1,7 +1,9 @@
 module Api
   class BeansController < ApplicationController
+    before_action :set_bean, only: %i[show update destroy]
+
     def index
-      beans = get_matching_beans(params["search_text"], params["country"]).map do |bean|
+      @beans = get_matching_beans(params["search_text"], params["country"]).map do |bean|
         {
           id: bean.id,
           name: bean.name,
@@ -14,9 +16,51 @@ module Api
           note: bean.note,
         }
       end
-      response = { count: beans.count, results: beans}
+      response = { count: @beans.count, results: @beans}
 
       render json: response
+    end
+
+    def show
+      render json: @event
+    end
+
+    def create
+      @bean = Bean.new(bean_params)
+      if @bean.save
+        render json: @bean, status: :created
+      else
+        render json: @bean.errors, status: :unprocessable_entity
+      end
+    end
+
+    def update
+      if @bean.update(bean_params)
+        render json: @bean, status: :ok
+      else
+        render json: @bean.errors, status: :unprocessable_entity
+      end
+    end
+
+    def destroy
+      @bean.destroy
+    end
+
+    def set_bean
+      @bean = Bean.find(params[:id])
+    end
+
+    def bean_params
+      params.require(:bean).permit(
+        :name,
+        :country,
+        :variety,
+        :process,
+        :producer,
+        :roaster,
+        :roast_level,
+        :note
+      )
     end
 
     def get_matching_beans(search_text, country)
@@ -30,5 +74,6 @@ module Api
         Bean.all
       end
     end
+
   end
 end
