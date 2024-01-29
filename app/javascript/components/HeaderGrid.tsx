@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import type { ReactNode } from "react";
 import {
   Center,
@@ -25,14 +25,23 @@ import HamburgerIcon from "./HamburgerIcon";
 import PlusIcon from "./PlusIcon";
 import AddBeanButton from "./AddBeanButton";
 import AddBeanDrawer from "./AddBeanDrawer";
+import { Link } from "react-router-dom";
+import {
+  BeanQueryContext,
+  useBeanQueryContext,
+} from "./contexts/BeanQueryProvider";
 
-interface Props {
-  onSearch: (searchText: string) => void;
-}
-const HeaderGrid = ({ onSearch }: Props): ReactNode => {
+const HeaderGrid = (): ReactNode => {
   const bg = useColorModeValue("white", "gray.800");
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { setBeanQuery } = useBeanQueryContext();
+  const onClick = () => {
+    setBeanQuery({
+      searchText: "",
+      country: "",
+    });
+  };
   return (
     <Grid
       templateColumns="150px 1fr"
@@ -49,16 +58,18 @@ const HeaderGrid = ({ onSearch }: Props): ReactNode => {
       bg={bg}
     >
       <GridItem>
-        <Center>
-          <HStack h="4.5rem">
-            <Logo />
-            <Heading fontSize="28px">Beans</Heading>
-          </HStack>
-        </Center>
+        <Link to="/beans" onClick={onClick}>
+          <Center>
+            <HStack h="4.5rem">
+              <Logo />
+              <Heading fontSize="28px">Beans</Heading>
+            </HStack>
+          </Center>
+        </Link>
       </GridItem>
       <GridItem>
         <HStack h="4.5rem" justifyContent="space-between">
-          <SearchInput onSearch={onSearch} />
+          <SearchInput />
           <Show above="sm">
             <Stack direction="row" spacing={4}>
               <AddBeanButton />

@@ -6,11 +6,13 @@ import {
   CardBody,
   CardHeader,
   Heading,
+  Link as ChakraLink,
   Stack,
   StackDivider,
   Text,
 } from "@chakra-ui/react";
-import type { Bean } from "../hooks/useBeans";
+import { Link as ReactRouterLink } from "react-router-dom";
+import { Bean } from "./types/Bean";
 
 interface Props {
   bean: Bean;
@@ -19,8 +21,15 @@ interface Props {
 const BeanCard = ({ bean }: Props): ReactNode => {
   return (
     <Card>
-      <CardHeader>
-        <Heading size="md">{bean.name}</Heading>
+      <CardHeader pb={0}>
+        <ChakraLink
+          as={ReactRouterLink}
+          to={`/beans/${bean.id}`}
+          fontSize="2xl"
+          fontWeight="bold"
+        >
+          {bean.name}
+        </ChakraLink>
       </CardHeader>
 
       <CardBody display="flex">

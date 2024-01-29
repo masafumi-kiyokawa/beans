@@ -1,20 +1,10 @@
-import type { BeanQuery } from "../App";
+import { useBeansContext } from "../components/contexts/BeansProvider";
+import { Bean } from "../components/types/Bean";
+import { BeanQuery } from "../components/types/BeanQuery";
 import useData from "./useData";
 
-export interface Bean {
-  id: string;
-  name: string;
-  country: string;
-  variety: string;
-  process: string;
-  producer: string;
-  roaster: string;
-  roast_level: string;
-  note: string;
-}
-
-const useBeans = (beanQuery: BeanQuery) =>
-  useData<Bean>(
+const useBeans = (beanQuery: BeanQuery) => {
+  const { data, error, isLoading } = useData<Bean>(
     "/api/beans",
     {
       params: {
@@ -24,5 +14,9 @@ const useBeans = (beanQuery: BeanQuery) =>
     },
     [beanQuery]
   );
+
+  console.log("api called");
+  return { data, error, isLoading };
+};
 
 export default useBeans;

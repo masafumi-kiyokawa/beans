@@ -21,10 +21,12 @@ import { ReactNode } from "react";
 import countries from "../data/countries";
 import roast_levels from "../data/roast_levels";
 import { Controller, useForm } from "react-hook-form";
-import { Bean } from "../hooks/useBeans";
 import { validationSchema } from "../validation/validationSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
+import { Bean } from "./types/Bean";
+import { useBeansContext } from "./contexts/BeansProvider";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   isOpen: boolean;
@@ -32,9 +34,12 @@ interface Props {
 }
 
 const AddBeanDrawer = ({ isOpen, onClose }: Props) => {
+  const { beans, setBeans } = useBeansContext();
+  const navigate = useNavigate();
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<Bean>({
     mode: "onChange",
@@ -42,7 +47,18 @@ const AddBeanDrawer = ({ isOpen, onClose }: Props) => {
   });
   const onSubmit = (data: Bean): void => {
     console.log(data);
-    axios.post("/api/beans", data);
+    axios
+      .post("/api/beans", data)
+      .then((res) => {
+        setBeans([...beans, res.data]);
+        onClose();
+        reset();
+        navigate(`/beans/${res.data?.id}`);
+      })
+      .catch((error) => {
+        console.log(error);
+        console.log(error);
+      });
   };
 
   return (

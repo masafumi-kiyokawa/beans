@@ -1,14 +1,37 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import type { ReactNode } from "react";
-import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
+import {
+  Button,
+  Input,
+  InputGroup,
+  InputLeftElement,
+  InputRightElement,
+  Text,
+} from "@chakra-ui/react";
 import { BsSearch } from "react-icons/bs";
+import { useBeanQueryContext } from "./contexts/BeanQueryProvider";
+import { useNavigate } from "react-router-dom";
 
-interface Props {
-  onSearch: (searchText: string) => void;
-}
+const SearchInput = (): ReactNode => {
+  const { beanQuery, setBeanQuery } = useBeanQueryContext();
 
-const SearchInput = ({ onSearch }: Props): ReactNode => {
   const ref = useRef<HTMLInputElement>(null);
+
+  const onSearch = (searchText: string): void => {
+    setBeanQuery({ ...beanQuery, searchText });
+  };
+
+  const onReset = (): void => {
+    setBeanQuery({ searchText: "", country: "" });
+    setSearchText("");
+  };
+
+  const [searchText, setSearchText] = useState("");
+  const handleInputChange = (event: any) => {
+    setSearchText(event.target.value);
+  };
+
+  const navigte = useNavigate();
 
   return (
     <form
@@ -16,6 +39,7 @@ const SearchInput = ({ onSearch }: Props): ReactNode => {
       onSubmit={(event) => {
         event.preventDefault();
         if (ref.current) onSearch(ref.current.value);
+        navigte("/beans");
       }}
     >
       <InputGroup>
@@ -24,10 +48,17 @@ const SearchInput = ({ onSearch }: Props): ReactNode => {
         </InputLeftElement>
         <Input
           ref={ref}
-          placeholder="Search beans..."
+          placeholder="Search..."
           variant="filled"
           boxShadow="base"
+          value={searchText}
+          onChange={handleInputChange}
         />
+        <InputRightElement w={16}>
+          <Button size="sm" onClick={onReset}>
+            <Text fontSize="xs">Reset</Text>
+          </Button>
+        </InputRightElement>
       </InputGroup>
     </form>
   );
