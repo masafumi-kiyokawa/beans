@@ -4,7 +4,7 @@ import roast_levels from "../data/roast_levels";
 
 const allowedCountries = countries.map((country) => country.name);
 
-export const validationSchema = z.object({
+export const beanValidationSchema = z.object({
   name: z
     .string()
     .min(4, "Name must contain at least 4 charactors.")

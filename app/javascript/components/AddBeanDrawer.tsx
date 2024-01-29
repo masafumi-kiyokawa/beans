@@ -21,12 +21,13 @@ import type { ReactNode } from "react";
 import countries from "../data/countries";
 import roast_levels from "../data/roast_levels";
 import { Controller, useForm } from "react-hook-form";
-import { validationSchema } from "../validation/validationSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import type { Bean } from "./types/Bean";
 import { useBeansContext } from "./contexts/BeansProvider";
 import { useNavigate } from "react-router-dom";
+import { beanValidationSchema } from "../validation/beanValidationSchema";
+import HookUsage from "./HookUsage";
 
 interface Props {
   isOpen: boolean;
@@ -43,7 +44,7 @@ const AddBeanDrawer = ({ isOpen, onClose }: Props): ReactNode => {
     formState: { errors },
   } = useForm<Bean>({
     mode: "onChange",
-    resolver: zodResolver(validationSchema),
+    resolver: zodResolver(beanValidationSchema),
   });
   const onSubmit = (data: Bean): void => {
     console.log(data);
@@ -156,6 +157,11 @@ const AddBeanDrawer = ({ isOpen, onClose }: Props): ReactNode => {
                 />
                 {errors.process && <Text>{errors.process?.message}</Text>}
               </Box>
+
+              <Box>
+                <HookUsage />
+              </Box>
+
               <Box>
                 <FormControl isInvalid={!!errors.roast_level}>
                   <FormLabel htmlFor="roast_level">Roast Level</FormLabel>

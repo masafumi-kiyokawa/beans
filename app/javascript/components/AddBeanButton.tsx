@@ -15,7 +15,7 @@ const AddBeanButton = (): ReactNode => {
         boxShadow="base"
         alignItems="center"
       >
-        <Text>Add bean</Text>
+        <Text>Add Bean</Text>
       </Button>
       <AddBeanDrawer isOpen={isOpen} onClose={onClose} />
     </>

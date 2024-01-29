@@ -10,17 +10,16 @@ import {
   TabPanel,
   Heading,
   Flex,
-  Button,
-  Text,
 } from "@chakra-ui/react";
 import type { Bean } from "./types/Bean";
-import PlusIcon from "./icons/PlusIcon";
+import RecipeForm from "./RecipeForm";
 
 const BeanDetail = (): ReactNode => {
   const { id } = useParams();
   const { beans, error } = useBeansContext();
   const bean = beans.find((bean: Bean) => bean.id === id);
   if (error) return <div>Error</div>;
+
   return (
     <>
       <Flex
@@ -35,23 +34,19 @@ const BeanDetail = (): ReactNode => {
       </Flex>
       <Tabs m={5}>
         <TabList>
-          <Tab>Info</Tab>
-          <Tab>Recipes</Tab>
+          <Tab>Bean Info</Tab>
+          <Tab>Recipes List</Tab>
+          <Tab>Add Recipe</Tab>
         </TabList>
         <TabPanels>
           <TabPanel>
-            <p>Info</p>
+            <p>Bean Info</p>
           </TabPanel>
           <TabPanel>
-            <Button
-              leftIcon={<PlusIcon />}
-              variant="outline"
-              boxShadow="base"
-              alignItems="center"
-            >
-              <Text>Add Recipe</Text>
-            </Button>
             <p>Recipes</p>
+          </TabPanel>
+          <TabPanel>
+            <RecipeForm bean_id={bean?.id} />
           </TabPanel>
         </TabPanels>
       </Tabs>
