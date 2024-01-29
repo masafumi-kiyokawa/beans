@@ -18,15 +18,15 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { FaMoon, FaSun } from "react-icons/fa";
-import Logo from "./Logo";
 import ColorModeSwitch from "./ColorModeSwitch";
 import SearchInput from "./SearchInput";
-import HamburgerIcon from "./HamburgerIcon";
-import PlusIcon from "./PlusIcon";
 import AddBeanButton from "./AddBeanButton";
 import AddBeanDrawer from "./AddBeanDrawer";
 import { Link } from "react-router-dom";
 import { useBeanQueryContext } from "./contexts/BeanQueryProvider";
+import HamburgerIcon from "./icons/HamburgerIcon";
+import Logo from "./icons/Logo";
+import PlusIcon from "./icons/PlusIcon";
 
 const HeaderGrid = (): ReactNode => {
   const bg = useColorModeValue("white", "gray.800");

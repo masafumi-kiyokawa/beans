@@ -14,7 +14,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import type { Bean } from "./types/Bean";
-import PlusIcon from "./PlusIcon";
+import PlusIcon from "./icons/PlusIcon";
 
 const BeanDetail = (): ReactNode => {
   const { id } = useParams();
