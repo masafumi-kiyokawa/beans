@@ -27,7 +27,6 @@ import type { Bean } from "./types/Bean";
 import { useBeansContext } from "./contexts/BeansProvider";
 import { useNavigate } from "react-router-dom";
 import { beanValidationSchema } from "../validation/beanValidationSchema";
-import HookUsage from "./HookUsage";
 
 interface Props {
   isOpen: boolean;
@@ -157,11 +156,6 @@ const AddBeanDrawer = ({ isOpen, onClose }: Props): ReactNode => {
                 />
                 {errors.process && <Text>{errors.process?.message}</Text>}
               </Box>
-
-              <Box>
-                <HookUsage />
-              </Box>
-
               <Box>
                 <FormControl isInvalid={!!errors.roast_level}>
                   <FormLabel htmlFor="roast_level">Roast Level</FormLabel>
