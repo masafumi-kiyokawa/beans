@@ -12,7 +12,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { Link as ReactRouterLink } from "react-router-dom";
-import { Bean } from "./types/Bean";
+import type { Bean } from "./types/Bean";
 
 interface Props {
   bean: Bean;

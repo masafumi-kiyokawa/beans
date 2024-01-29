@@ -1,7 +1,6 @@
-import React, { useContext, useEffect } from "react";
+import React from "react";
 import type { ReactNode } from "react";
 import { Flex, Heading, Text } from "@chakra-ui/react";
-import useBeans from "../hooks/useBeans";
 import BeanCard from "./BeansCard";
 import BeansCardContainer from "./BeansCardContainer";
 import BeansCardSkeleton from "./BeansCardSkeleton";
@@ -9,14 +8,9 @@ import { useBeanQueryContext } from "./contexts/BeanQueryProvider";
 import { useBeansContext } from "./contexts/BeansProvider";
 
 const BeansGrid = (): ReactNode => {
-  const { beanQuery, setBeanQuery } = useBeanQueryContext();
-  const { beans, setBeans } = useBeansContext();
-  const { data, error, isLoading } = useBeans(beanQuery);
+  const { beanQuery } = useBeanQueryContext();
+  const { beans, error, isLoading } = useBeansContext();
   const skeletons = [1, 2, 3];
-
-  useEffect(() => {
-    setBeans(data);
-  }, [data]);
 
   if (error) return <Text>{error}</Text>;
   return (
@@ -37,7 +31,7 @@ const BeansGrid = (): ReactNode => {
             <BeansCardSkeleton />
           </BeansCardContainer>
         ))}
-      {data.map((bean) => (
+      {beans.map((bean) => (
         <BeansCardContainer key={bean.id}>
           <BeanCard bean={bean} />
         </BeansCardContainer>

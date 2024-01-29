@@ -1,4 +1,5 @@
-import React, { useContext, useEffect } from "react";
+import React from "react";
+import type { ReactNode } from "react";
 import { useParams } from "react-router-dom";
 import { useBeansContext } from "./contexts/BeansProvider";
 import {
@@ -8,18 +9,30 @@ import {
   TabPanels,
   TabPanel,
   Heading,
+  Flex,
+  Button,
+  Text,
 } from "@chakra-ui/react";
-import { Bean } from "./types/Bean";
-import useBeans from "../hooks/useBeans";
+import type { Bean } from "./types/Bean";
+import PlusIcon from "./PlusIcon";
 
-const BeanDetail = () => {
+const BeanDetail = (): ReactNode => {
   const { id } = useParams();
-  const { beans, setBeans } = useBeansContext();
+  const { beans, error } = useBeansContext();
   const bean = beans.find((bean: Bean) => bean.id === id);
-  if (bean === undefined) return <div>Error</div>;
+  if (error) return <div>Error</div>;
   return (
     <>
-      <Heading fontSize="2xl">{bean.name}</Heading>
+      <Flex
+        h="4.5rem"
+        justifyContent="space-between"
+        alignItems="center"
+        mx={5}
+        mt={5}
+        p={1}
+      >
+        <Heading fontSize="2xl">{bean?.name}</Heading>
+      </Flex>
       <Tabs m={5}>
         <TabList>
           <Tab>Info</Tab>
@@ -30,6 +43,14 @@ const BeanDetail = () => {
             <p>Info</p>
           </TabPanel>
           <TabPanel>
+            <Button
+              leftIcon={<PlusIcon />}
+              variant="outline"
+              boxShadow="base"
+              alignItems="center"
+            >
+              <Text>Add Recipe</Text>
+            </Button>
             <p>Recipes</p>
           </TabPanel>
         </TabPanels>

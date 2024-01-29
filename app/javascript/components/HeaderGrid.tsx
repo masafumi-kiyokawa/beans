@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import type { ReactNode } from "react";
 import {
   Center,
@@ -26,17 +26,14 @@ import PlusIcon from "./PlusIcon";
 import AddBeanButton from "./AddBeanButton";
 import AddBeanDrawer from "./AddBeanDrawer";
 import { Link } from "react-router-dom";
-import {
-  BeanQueryContext,
-  useBeanQueryContext,
-} from "./contexts/BeanQueryProvider";
+import { useBeanQueryContext } from "./contexts/BeanQueryProvider";
 
 const HeaderGrid = (): ReactNode => {
   const bg = useColorModeValue("white", "gray.800");
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { setBeanQuery } = useBeanQueryContext();
-  const onClick = () => {
+  const onClick = (): void => {
     setBeanQuery({
       searchText: "",
       country: "",

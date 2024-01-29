@@ -27,7 +27,7 @@ const SearchInput = (): ReactNode => {
   };
 
   const [searchText, setSearchText] = useState("");
-  const handleInputChange = (event: any) => {
+  const handleInputChange = (event: any): void => {
     setSearchText(event.target.value);
   };
 

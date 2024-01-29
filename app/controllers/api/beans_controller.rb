@@ -22,7 +22,7 @@ module Api
     end
 
     def show
-      render json: @event
+      render json: @bean
     end
 
     def create

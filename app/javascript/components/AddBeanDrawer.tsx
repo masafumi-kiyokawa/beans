@@ -17,14 +17,14 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 import React from "react";
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import countries from "../data/countries";
 import roast_levels from "../data/roast_levels";
 import { Controller, useForm } from "react-hook-form";
 import { validationSchema } from "../validation/validationSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
-import { Bean } from "./types/Bean";
+import type { Bean } from "./types/Bean";
 import { useBeansContext } from "./contexts/BeansProvider";
 import { useNavigate } from "react-router-dom";
 
@@ -33,7 +33,7 @@ interface Props {
   onClose: () => void;
 }
 
-const AddBeanDrawer = ({ isOpen, onClose }: Props) => {
+const AddBeanDrawer = ({ isOpen, onClose }: Props): ReactNode => {
   const { beans, setBeans } = useBeansContext();
   const navigate = useNavigate();
   const {
@@ -65,7 +65,12 @@ const AddBeanDrawer = ({ isOpen, onClose }: Props) => {
     <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
       <DrawerOverlay />
       <DrawerContent zIndex={2} overflowY="auto">
-        <form action="post" onSubmit={handleSubmit(onSubmit)}>
+        <form
+          action="post"
+          onSubmit={() => {
+            handleSubmit(onSubmit);
+          }}
+        >
           <DrawerCloseButton />
           <DrawerHeader borderBottomWidth="1px">Add a new Bean</DrawerHeader>
           <DrawerBody>

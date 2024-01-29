@@ -1,0 +1,11 @@
+export interface Recipe {
+  id: string;
+  name: string;
+  country: string;
+  variety: string;
+  process: string;
+  producer: string;
+  roaster: string;
+  roast_level: string;
+  note: string;
+}
