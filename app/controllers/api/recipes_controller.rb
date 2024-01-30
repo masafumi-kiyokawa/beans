@@ -1,25 +1,29 @@
 module Api
   class RecipesController < ApplicationController
+    before_action :set_bean, only: %i[index]
     before_action :set_recipe, only: %i[show update destroy]
 
     def index
-      @bean = bean.where("id = :id", id: params["id"])
-      @recipes = recipe.where("bean = :bean", bean: @bean) do |recipe|
-        {
-          id: recipe.id,
-          bean_id: recipe.bean.id,
-          title: recipe.title,
-          bean_quantity: recipe.bean_quantity,
-          grind: recipe.grind,
-          duration: recipe.duration,
-          tempeleture: recipe.tempeleture,
-          water_quantity: recipe.water_quantity,
-          note: recipe.note,
-        }
-      end
-      response = { count: @recipes.count, results: @recipes}
 
-      render json: response
+      if @bean
+        @recipes = Recipe.where("bean_id = :bean_id", bean_id: @bean.id) do |recipe|
+          {
+            id: recipe.id,
+            bean_id: recipe.bean.id,
+            title: recipe.title,
+            bean_quantity: recipe.bean_quantity,
+            grind: recipe.grind,
+            duration: recipe.duration,
+            tempereture: recipe.tempereture,
+            water_quantity: recipe.water_quantity,
+            note: recipe.note,
+          }
+        end
+        response = { count: @recipes.count, results: @recipes}
+        render json: response
+      else
+        render json: { error: 'Bean not found' }, status: :not_found
+      end
     end
 
     def show
@@ -46,7 +50,7 @@ module Api
     end
 
     def update
-      if @recipe.update(recipe_params)
+      if Recipe.update(recipe_params)
         render json: @recipe, status: :ok
       else
         render json: @recipe.errors, status: :unprocessable_entity
@@ -57,8 +61,14 @@ module Api
       @recipe.destroy
     end
 
+    private
+
+    def set_bean
+      @bean = Bean.find_by(id: params[:bean_id])
+    end
+
     def set_recipe
-      @recipe = recipe.find(params[:id])
+      @recipe = Recipe.find_by(id: params[:id])
     end
 
     def recipe_params
@@ -68,7 +78,7 @@ module Api
         :bean_quantity,
         :grind,
         :duration,
-        :tempeleture,
+        :tempereture,
         :water_quantity,
         :note
       )

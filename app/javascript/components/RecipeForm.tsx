@@ -33,7 +33,7 @@ const RecipeForm = ({ bean_id }: Props): ReactNode => {
     getDecrementButtonProps: getBeanQuantityDecrementButtonProps1,
   } = useNumberInput({
     step: 0.1,
-    defaultValue: 16.0,
+    defaultValue: 16,
     min: 5,
     max: 50,
     precision: 1,
@@ -48,16 +48,32 @@ const RecipeForm = ({ bean_id }: Props): ReactNode => {
     getIncrementButtonProps: getTemperetureIncrementButtonProps1,
     getDecrementButtonProps: getTemperetureDecrementButtonProps1,
   } = useNumberInput({
-    step: 0.1,
-    defaultValue: 16.0,
-    min: 5,
-    max: 50,
-    precision: 1,
+    step: 1,
+    defaultValue: 90,
+    min: 0,
+    max: 100,
+    precision: 0,
   });
 
   const temperetureInput = getTemperetureInputProps();
   const temperetureInc = getTemperetureIncrementButtonProps1();
   const temperetureDec = getTemperetureDecrementButtonProps1();
+
+  const {
+    getInputProps: getWaterQuantityInputProps,
+    getIncrementButtonProps: getWaterQuantityIncrementButtonProps1,
+    getDecrementButtonProps: getWaterQuantityDecrementButtonProps1,
+  } = useNumberInput({
+    step: 10,
+    defaultValue: 250,
+    min: 50,
+    max: 1000,
+    precision: 0,
+  });
+
+  const waterQuantityInput = getWaterQuantityInputProps();
+  const waterQuantityInc = getWaterQuantityIncrementButtonProps1();
+  const waterQuantityDec = getWaterQuantityDecrementButtonProps1();
 
   const {
     control,
@@ -106,33 +122,31 @@ const RecipeForm = ({ bean_id }: Props): ReactNode => {
         <Box>
           <FormControl isInvalid={!!errors.bean_quantity}>
             <FormLabel htmlFor="bean_quantity">Bean Quantity</FormLabel>
-            <HStack maxW="320px">
-              <InputGroup>
-                <Button {...beanQuantityInc} mr={5}>
-                  +
-                </Button>
-                <Controller
-                  name="bean_quantity"
-                  control={control}
-                  render={({ field }) => (
-                    <>
-                      <Input {...field} {...beanQuantityInput} />
-                      <InputRightAddon>g</InputRightAddon>
-                    </>
-                  )}
-                />
-                <Button {...beanQuantityDec} ml={5}>
-                  -
-                </Button>
-              </InputGroup>
-            </HStack>
+            <Controller
+              name="bean_quantity"
+              control={control}
+              defaultValue={16.0}
+              render={({ field }) => (
+                <HStack maxW="240px">
+                  <InputGroup>
+                    <Button {...beanQuantityInc} mr={5}>
+                      +
+                    </Button>
+                    <Input {...field} {...beanQuantityInput} />
+                    <InputRightAddon>g</InputRightAddon>
+                    <Button {...beanQuantityDec} ml={5}>
+                      -
+                    </Button>
+                  </InputGroup>
+                </HStack>
+              )}
+            />
+            {errors.bean_quantity && (
+              <Text fontSize="sm" color="red">
+                {errors.bean_quantity?.message as ReactNode}
+              </Text>
+            )}
           </FormControl>
-
-          {errors.bean_quantity && (
-            <Text fontSize="sm" color="red">
-              {errors.bean_quantity?.message as ReactNode}
-            </Text>
-          )}
         </Box>
         <Box>
           <FormControl isInvalid={!!errors.grind}>
@@ -167,7 +181,7 @@ const RecipeForm = ({ bean_id }: Props): ReactNode => {
             <Controller
               name="duration"
               control={control}
-              defaultValue=""
+              defaultValue="00:03:00"
               render={({ field }) => (
                 <Input
                   {...field}
@@ -187,47 +201,58 @@ const RecipeForm = ({ bean_id }: Props): ReactNode => {
         </Box>
         <Box>
           <FormControl isInvalid={!!errors.tempereture}>
-            <FormLabel htmlFor="tempeleture">Water Tempeleture</FormLabel>
-            <HStack maxW="320px">
-              <InputGroup>
-                <Button {...inc1} mr={5}>
-                  +
-                </Button>
-                <Controller
-                  name="tempeleture"
-                  control={control}
-                  render={({ field }) => (
-                    <>
-                      <Input {...field} {...input1} />
-                      <InputRightAddon>°C</InputRightAddon>
-                    </>
-                  )}
-                />
-                <Button {...dec1} ml={5}>
-                  -
-                </Button>
-              </InputGroup>
-            </HStack>
+            <FormLabel htmlFor="tempereture">Water Tempeleture</FormLabel>
+            <Controller
+              name="tempereture"
+              control={control}
+              defaultValue={100}
+              render={({ field }) => (
+                <HStack maxW="240px">
+                  <InputGroup>
+                    <Button {...temperetureInc} mr={5}>
+                      +
+                    </Button>
+                    <Input {...field} {...temperetureInput} />
+                    <InputRightAddon>°C</InputRightAddon>
+                    <Button {...temperetureDec} ml={5}>
+                      -
+                    </Button>
+                  </InputGroup>
+                </HStack>
+              )}
+            />
+            {errors.tempereture && (
+              <Text fontSize="sm" color="red">
+                {errors.tempereture?.message as ReactNode}
+              </Text>
+            )}
           </FormControl>
         </Box>
         <Box>
-          <FormControl isInvalid={!!errors.title}>
-            <FormLabel htmlFor="water_quantity">Title</FormLabel>
+          <FormControl isInvalid={!!errors.water_quantity}>
+            <FormLabel htmlFor="water_quantity">Water Quantity</FormLabel>
             <Controller
-              name="title"
+              name="water_quantity"
               control={control}
-              defaultValue=""
+              defaultValue={250}
               render={({ field }) => (
-                <Input
-                  {...field}
-                  id="title"
-                  placeholder="Please enter recipe title"
-                />
+                <HStack maxW="240px">
+                  <InputGroup>
+                    <Button {...waterQuantityInc} mr={5}>
+                      +
+                    </Button>
+                    <Input {...field} {...waterQuantityInput} />
+                    <InputRightAddon>g</InputRightAddon>
+                    <Button {...waterQuantityDec} ml={5}>
+                      -
+                    </Button>
+                  </InputGroup>
+                </HStack>
               )}
             />
-            {errors.title && (
+            {errors.water_quantity && (
               <Text fontSize="sm" color="red">
-                {errors.title?.message as ReactNode}
+                {errors.water_quantity?.message as ReactNode}
               </Text>
             )}
           </FormControl>
@@ -238,7 +263,7 @@ const RecipeForm = ({ bean_id }: Props): ReactNode => {
             name="note"
             control={control}
             defaultValue=""
-            render={({ field }) => <Textarea {...field} id="note" />}
+            render={({ field }) => <Textarea {...field} id="note" h={200} />}
           />
           {errors.note && <Text>{errors.note?.message}</Text>}
         </Box>

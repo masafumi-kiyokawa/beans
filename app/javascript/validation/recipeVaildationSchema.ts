@@ -9,27 +9,26 @@ export const recipeValidationSchema = z.object({
     .min(4, "Title must contain at least 4 charactors.")
     .max(40, "Title must cotain 40 charactors or less."),
   bean_quantity: z
-    .number({ required_error: "Bean Quantity is required" })
-    .gte(5.0, "Bean quantity must be greater than or equal to 5.")
-    .lte(50.0, "Bean quantity must be less than or equal to 50."),
+    .number()
+    .gte(5.0, "Bean quantity must be greater than 5.0.")
+    .lte(50.0, "Bean quantity must be greater than 50.0.")
+    .refine((value) => value !== undefined, "Bean quantity is required."),
   grind: z
     .string()
-    .min(1, "Grind is required.")
-    .max(5)
+    .min(1, "Grind size is required.")
     .refine((value) => grind_sizes.includes(value), "Grind size is invalid."),
   duration: z
     .string()
-    // .min(1, "Duration is required.")
     .refine((value) => timeRegex.test(value), "Invalid time format."),
   tempereture: z
     .number()
-    .gte(0, "Water tempeleture must be greater than or equal to 0.")
-    .lte(100, "Water tempeleture must be less than or equal to 100.")
-    .refine((value) => value !== undefined, "Water tempeleture is required."),
+    .gte(0, "Water tempereture must be greater than 0.")
+    .lte(100, "Water tempereture must be greater than 100.")
+    .refine((value) => value !== undefined, "Water tempereture is required."),
   water_quantity: z
     .number()
-    .gte(100, "Water quantity must be greater than or equal to 0.")
-    .lte(500, "Water quantity must be less than or equal to 100.")
+    .gte(50, "Water quantity must be greater than 50.")
+    .lte(1000, "Water quantity must be greater than 1000.")
     .refine((value) => value !== undefined, "Water quantity is required."),
-  note: z.string(),
+  note: z.string().max(800, "Note must cotain 800 charactors or less."),
 });
