@@ -5,7 +5,7 @@ export interface Recipe {
   bean_quantity: number;
   grind: string;
   duration: string;
-  tempeleture: number;
+  tempereture: number;
   water_quantity: number;
   note: string;
 }

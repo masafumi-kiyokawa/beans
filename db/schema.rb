@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_22_120727) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_30_131835) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -33,7 +33,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_22_120727) do
     t.decimal "bean_quantity", precision: 5, scale: 1, null: false
     t.string "grind", null: false
     t.time "duration", null: false
-    t.integer "tempeleture", null: false
+    t.integer "tempereture", null: false
     t.integer "water_quantity", null: false
     t.text "note"
     t.datetime "created_at", null: false
