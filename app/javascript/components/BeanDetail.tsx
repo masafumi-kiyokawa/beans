@@ -13,12 +13,15 @@ import {
 } from "@chakra-ui/react";
 import type { Bean } from "./types/Bean";
 import RecipeForm from "./RecipeForm";
+import BeanInfo from "./BeanInfo";
+import RecipesList from "./RecipesList";
 
 const BeanDetail = (): ReactNode => {
   const { id } = useParams();
   const { beans, error } = useBeansContext();
-  const bean = beans.find((bean: Bean) => bean.id === id);
   if (error) return <div>Error</div>;
+  const bean = beans.find((bean: Bean) => bean.id === id);
+  if (bean === undefined) return <div>Not Found</div>;
 
   return (
     <>
@@ -40,13 +43,13 @@ const BeanDetail = (): ReactNode => {
         </TabList>
         <TabPanels>
           <TabPanel>
-            <p>Bean Info</p>
+            <BeanInfo bean={bean} />
           </TabPanel>
           <TabPanel>
-            <p>Recipes</p>
+            <RecipesList bean_id={bean.id} />
           </TabPanel>
           <TabPanel>
-            <RecipeForm bean_id={bean?.id} />
+            <RecipeForm bean_id={bean.id} />
           </TabPanel>
         </TabPanels>
       </Tabs>

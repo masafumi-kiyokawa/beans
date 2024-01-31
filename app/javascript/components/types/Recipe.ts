@@ -8,4 +8,6 @@ export interface Recipe {
   tempereture: number;
   water_quantity: number;
   note: string;
+  created_at: string;
+  updated_at: string;
 }
