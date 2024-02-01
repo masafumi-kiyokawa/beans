@@ -9,6 +9,7 @@ import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import { BeanQueryProvider } from "./components/contexts/BeanQueryProvider";
 import { BeansProvider } from "./components/contexts/BeansProvider";
+import { RecipesProvider } from "./components/contexts/RecipesProvider";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -16,9 +17,13 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <ChakraProvider>
         <BeanQueryProvider>
           <BeansProvider>
-            <ColorModeScript initialColorMode={theme.config.initialColorMode} />
-            <CSSReset />
-            <App />
+            <RecipesProvider>
+              <ColorModeScript
+                initialColorMode={theme.config.initialColorMode}
+              />
+              <CSSReset />
+              <App />
+            </RecipesProvider>
           </BeansProvider>
         </BeanQueryProvider>
       </ChakraProvider>

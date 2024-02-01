@@ -52,6 +52,7 @@ const SearchInput = (): ReactNode => {
           variant="filled"
           boxShadow="base"
           value={searchText}
+          id="search"
           onChange={handleInputChange}
         />
         <InputRightElement w={16}>

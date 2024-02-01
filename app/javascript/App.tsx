@@ -7,6 +7,7 @@ import { Grid, GridItem, Show } from "@chakra-ui/react";
 import BeansGrid from "./components/BeansGrid";
 import NavGrid from "./components/NavGrid";
 import BeanDetail from "./components/BeanDetail";
+import RecipeDetail from "./components/RecipeDetail";
 
 const App = (): ReactNode => {
   const { beanQuery, setBeanQuery } = useBeanQueryContext();
@@ -31,6 +32,7 @@ const App = (): ReactNode => {
           <Routes>
             <Route path="/beans" element={<BeansGrid />} />
             <Route path="/beans/:id" element={<BeanDetail />} />
+            <Route path="/recipes/:id" element={<RecipeDetail />} />
           </Routes>
         </GridItem>
       </Grid>

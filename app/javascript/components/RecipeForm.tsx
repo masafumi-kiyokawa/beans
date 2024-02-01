@@ -88,6 +88,7 @@ const RecipeForm = ({ bean_id }: Props): ReactNode => {
     axios
       .post("/api/recipes", { bean_id: bean_id, recipe: data })
       .then((res) => {
+        console.log(res.data);
         reset();
       })
       .catch((error) => {
@@ -132,7 +133,11 @@ const RecipeForm = ({ bean_id }: Props): ReactNode => {
                     <Button {...beanQuantityInc} mr={5}>
                       +
                     </Button>
-                    <Input {...field} {...beanQuantityInput} />
+                    <Input
+                      {...field}
+                      {...beanQuantityInput}
+                      id="bean_quantity"
+                    />
                     <InputRightAddon>g</InputRightAddon>
                     <Button {...beanQuantityDec} ml={5}>
                       -
@@ -212,7 +217,7 @@ const RecipeForm = ({ bean_id }: Props): ReactNode => {
                     <Button {...temperetureInc} mr={5}>
                       +
                     </Button>
-                    <Input {...field} {...temperetureInput} />
+                    <Input {...field} {...temperetureInput} id="tempereture" />
                     <InputRightAddon>°C</InputRightAddon>
                     <Button {...temperetureDec} ml={5}>
                       -
@@ -241,7 +246,11 @@ const RecipeForm = ({ bean_id }: Props): ReactNode => {
                     <Button {...waterQuantityInc} mr={5}>
                       +
                     </Button>
-                    <Input {...field} {...waterQuantityInput} />
+                    <Input
+                      {...field}
+                      {...waterQuantityInput}
+                      id="water_quantity"
+                    />
                     <InputRightAddon>g</InputRightAddon>
                     <Button {...waterQuantityDec} ml={5}>
                       -
