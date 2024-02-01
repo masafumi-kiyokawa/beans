@@ -46,10 +46,10 @@ const BeanDetail = (): ReactNode => {
             <BeanInfo bean={bean} />
           </TabPanel>
           <TabPanel>
-            <RecipesList bean_id={bean.id} />
+            <RecipesList beanId={bean.id} />
           </TabPanel>
           <TabPanel>
-            <RecipeForm bean_id={bean.id} />
+            <RecipeForm beanId={bean.id} />
           </TabPanel>
         </TabPanels>
       </Tabs>

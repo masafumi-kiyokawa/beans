@@ -11,7 +11,7 @@ export const BeanQueryContext = createContext<BeanQueryContextType | undefined>(
   undefined
 );
 
-export function useBeanQueryContext() {
+export function useBeanQueryContext(): BeanQueryContextType {
   const beanQueryContext = useContext(BeanQueryContext);
 
   if (beanQueryContext === undefined) {

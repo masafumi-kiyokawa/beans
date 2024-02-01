@@ -1,11 +1,12 @@
 import React from "react";
+import type { ReactNode } from "react";
 import { useParams } from "react-router-dom";
 import { useRecipesContext } from "./contexts/RecipesProvider";
-import { Recipe } from "./types/Recipe";
+import type { Recipe } from "./types/Recipe";
 
-const RecipeDetail = () => {
+const RecipeDetail = (): ReactNode => {
   const { id } = useParams();
-  const { recipes, setRecipes } = useRecipesContext();
+  const { recipes } = useRecipesContext();
 
   const recipe = recipes.find((recipe: Recipe) => recipe.id === id);
   if (recipe === undefined) return <div>Not Found</div>;

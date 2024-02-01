@@ -1,23 +1,14 @@
+import React, { memo, useEffect, useState } from "react";
+import type { ReactNode } from "react";
 import axios, { CanceledError } from "axios";
-import React, { memo, useContext, useEffect, useState } from "react";
-import { Recipe } from "./types/Recipe";
-import {
-  Card,
-  CardBody,
-  CardHeader,
-  Flex,
-  Heading,
-  Stack,
-  Text,
-} from "@chakra-ui/react";
+import type { Recipe } from "./types/Recipe";
+import { Flex, Heading, Text } from "@chakra-ui/react";
 import RecipesCard from "./RecipesCard";
 import RecipesCardContainer from "./RecipesCardContainer";
-import { log } from "console";
-import useRecipe from "./hooks/useRecipe";
-import { RecipesContext, useRecipesContext } from "./contexts/RecipesProvider";
+import { useRecipesContext } from "./contexts/RecipesProvider";
 
 interface Props {
-  bean_id: string;
+  beanId: string;
 }
 
 interface FetchResponce {
@@ -25,7 +16,7 @@ interface FetchResponce {
   results: Recipe[];
 }
 
-const RecipesList = memo(({ bean_id }: Props) => {
+const RecipesList = memo(({ beanId }: Props): ReactNode => {
   const { recipes, setRecipes } = useRecipesContext();
   const [error, setError] = useState<string | any>("");
   const [isLoading, setIsLoading] = useState(false);
@@ -35,7 +26,7 @@ const RecipesList = memo(({ bean_id }: Props) => {
     setIsLoading(true);
     axios
       .get<FetchResponce>("/api/recipes", {
-        params: { bean_id: bean_id },
+        params: { bean_id: beanId },
         signal: controller.signal,
       })
       .then((res) => {
@@ -51,7 +42,7 @@ const RecipesList = memo(({ bean_id }: Props) => {
     return () => {
       controller.abort();
     };
-  }, [bean_id]);
+  }, [beanId]);
 
   if (error) return <Text>{error}</Text>;
   if (recipes.length === 0) return <Text>Not Found</Text>;

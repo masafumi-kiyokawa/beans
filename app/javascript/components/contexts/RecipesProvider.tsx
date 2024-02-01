@@ -1,7 +1,6 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 import type { ReactNode } from "react";
 import type { Recipe } from "../types/Recipe";
-import axios, { CanceledError } from "axios";
 
 interface RecipesContextType {
   recipes: Recipe[];
@@ -12,7 +11,7 @@ export const RecipesContext = createContext<RecipesContextType | undefined>(
   undefined
 );
 
-export function useRecipesContext() {
+export function useRecipesContext(): RecipesContextType {
   const recipesContext = useContext(RecipesContext);
 
   if (recipesContext === undefined) {

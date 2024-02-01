@@ -17,7 +17,7 @@ export const BeansContext = createContext<BeansContextType | undefined>(
   undefined
 );
 
-export function useBeansContext() {
+export function useBeansContext(): BeansContextType {
   const beansContext = useContext(BeansContext);
 
   if (beansContext === undefined) {

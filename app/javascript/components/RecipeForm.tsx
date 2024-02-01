@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import type { ReactNode } from "react";
-import { Recipe } from "./types/Recipe";
+import type { Recipe } from "./types/Recipe";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { recipeValidationSchema } from "../validation/recipeVaildationSchema";
@@ -23,10 +23,10 @@ import {
 import grind_sizes from "../data/grind_sizes";
 
 interface Props {
-  bean_id: string | undefined;
+  beanId: string | undefined;
 }
 
-const RecipeForm = ({ bean_id }: Props): ReactNode => {
+const RecipeForm = ({ beanId }: Props): ReactNode => {
   const {
     getInputProps: getBeanQuantityInputProps,
     getIncrementButtonProps: getBeanQuantityIncrementButtonProps1,
@@ -86,7 +86,7 @@ const RecipeForm = ({ bean_id }: Props): ReactNode => {
   });
   const onSubmit = (data: Recipe): void => {
     axios
-      .post("/api/recipes", { bean_id: bean_id, recipe: data })
+      .post("/api/recipes", { beanId, recipe: data })
       .then((res) => {
         console.log(res.data);
         reset();

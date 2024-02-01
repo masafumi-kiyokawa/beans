@@ -1,9 +1,9 @@
 import React from "react";
-import { Recipe } from "./types/Recipe";
+import type { ReactNode } from "react";
+import type { Recipe } from "./types/Recipe";
 import {
   Card,
   CardHeader,
-  Heading,
   CardBody,
   Text,
   Link as ChakraLink,
@@ -13,7 +13,7 @@ import { Link as ReactRouterLink } from "react-router-dom";
 interface Props {
   recipe: Recipe;
 }
-const RecipesCard = ({ recipe }: Props) => {
+const RecipesCard = ({ recipe }: Props): ReactNode => {
   return (
     <Card variant="outline">
       <CardHeader>

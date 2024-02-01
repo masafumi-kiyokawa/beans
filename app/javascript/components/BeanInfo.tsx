@@ -1,11 +1,12 @@
 import React from "react";
-import { Bean } from "./types/Bean";
+import type { ReactNode } from "react";
+import type { Bean } from "./types/Bean";
 
 interface Props {
   bean: Bean;
 }
 
-const BeanInfo = ({ bean }: Props) => {
+const BeanInfo = ({ bean }: Props): ReactNode => {
   return (
     <ul>
       <li>{bean.name}</li>
