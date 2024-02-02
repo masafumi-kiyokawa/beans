@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchRecipeFunction } from "./functions/fetchRecipefunction";
 import EditRecipe from "./EditRecipe";
 import RecipeInfo from "./RecipeInfo";
+import { Box } from "@chakra-ui/react";
 
 const RecipeDetail = (): ReactNode => {
   const { id } = useParams();
@@ -18,10 +19,12 @@ const RecipeDetail = (): ReactNode => {
   if (data === undefined) return <div>error</div>;
 
   return (
-    <Routes>
-      <Route path="/edit" element={<EditRecipe recipe={data} />} />
-      <Route path="/*" element={<RecipeInfo recipe={data} />} />
-    </Routes>
+    <Box p="16px">
+      <Routes>
+        <Route path="/edit" element={<EditRecipe recipe={data} />} />
+        <Route path="/*" element={<RecipeInfo recipe={data} />} />
+      </Routes>
+    </Box>
   );
 };
 

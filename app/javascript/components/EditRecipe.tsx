@@ -17,6 +17,7 @@ import {
   Divider,
   Flex,
   Heading,
+  Show,
 } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { ReactNode } from "react";
@@ -114,24 +115,17 @@ const EditRecipe = ({ recipe }: Props): ReactNode => {
 
   return (
     <form method="post" onSubmit={handleSubmit(onSubmit)} noValidate>
-      <Flex
-        justifyContent="space-between"
-        alignItems="center"
-        mx={5}
-        mt={20}
-        mb={5}
-        px="16px"
-      >
+      <Flex justifyContent="space-between" alignItems="center" mt={20} mb={5}>
         <Heading fontSize="3xl">{recipe.title}</Heading>
         <Flex justify="flex-end">
-          <Box mt={3}>
-            <Button variant="outline" mr={3} onClick={onCancel}>
+          <Show above="sm">
+            <Button variant="outline" mr={4} onClick={onCancel} w="105px">
               Cancel
             </Button>
-            <Button type="submit" variant="solid">
+            <Button type="submit" variant="solid" w="105px">
               Submit
             </Button>
-          </Box>
+          </Show>
         </Flex>
       </Flex>
       <Divider mb={5} />
@@ -325,6 +319,16 @@ const EditRecipe = ({ recipe }: Props): ReactNode => {
           {errors.note && <Text>{errors.note?.message}</Text>}
         </Box>
       </Stack>
+      <Show below="sm">
+        <Flex mt="24px" justify="flex-start">
+          <Button variant="outline" mr={4} onClick={onCancel} w="105px">
+            Cancel
+          </Button>
+          <Button type="submit" w="105px">
+            Submit
+          </Button>
+        </Flex>
+      </Show>
     </form>
   );
 };
