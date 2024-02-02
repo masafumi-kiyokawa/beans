@@ -71,7 +71,10 @@ const DeleteBeanButton = ({ bean }: Props): ReactNode => {
         <ModalContent>
           <ModalHeader>Confirmation</ModalHeader>
           <ModalCloseButton />
-          <ModalBody>Are you sure to delete {bean.name}?</ModalBody>
+          <ModalBody>
+            <Text>Are you sure to delete {bean.name}?</Text>
+            <Text>Related recipes will also be deleted.</Text>
+          </ModalBody>
 
           <ModalFooter>
             <Button mr={3} onClick={onClose}>
