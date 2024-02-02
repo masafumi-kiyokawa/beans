@@ -6,7 +6,7 @@ module Api
     def index
 
       if @bean
-        @recipes = Recipe.where("bean_id = :bean_id", bean_id: @bean.id) do |recipe|
+        @recipes = Recipe.where("bean_id = :bean_id", bean_id: @bean.id).order(updated_at: :desc) do |recipe|
           {
             id: recipe.id,
             bean_id: recipe.bean.id,
@@ -17,8 +17,11 @@ module Api
             tempereture: recipe.tempereture,
             water_quantity: recipe.water_quantity,
             note: recipe.note,
+            created_at: recipe.created_at,
+            updated_at: recipe.updated_at
           }
         end
+        @recipes = @recipes.order(created_at: :desc)
         response = { count: @recipes.count, results: @recipes}
         render json: response
       else
@@ -80,7 +83,7 @@ module Api
         :duration,
         :tempereture,
         :water_quantity,
-        :note
+        :note,
       )
     end
   end

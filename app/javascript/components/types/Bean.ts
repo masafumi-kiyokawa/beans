@@ -8,4 +8,6 @@ export interface Bean {
   roaster: string;
   roast_level: string;
   note: string;
+  created_at: string;
+  updated_at: string;
 }

@@ -14,10 +14,11 @@ module Api
           roaster: bean.roaster,
           roast_level: bean.roast_level,
           note: bean.note,
+          created_at: bean.created_at,
+          updated_at: bean.updated_at
         }
       end
       response = { count: @beans.count, results: @beans}
-
       render json: response
     end
 
@@ -59,19 +60,19 @@ module Api
         :producer,
         :roaster,
         :roast_level,
-        :note
+        :note,
       )
     end
 
     def get_matching_beans(search_text, country)
       if !search_text.blank? && !country.blank?
-        Bean.where("(name LIKE :search_text OR variety LIKE :search_text OR note LIKE :search_text) AND country = :country", search_text: "%#{search_text}%", country: country)
+        Bean.where("(name LIKE :search_text OR variety LIKE :search_text OR note LIKE :search_text) AND country = :country", search_text: "%#{search_text}%", country: country).order(updated_at: :desc)
       elsif !search_text.blank? then
-        Bean.where("name LIKE :search_text OR variety LIKE :search_text OR note LIKE :search_text", search_text: "%#{search_text}%")
+        Bean.where("name LIKE :search_text OR variety LIKE :search_text OR note LIKE :search_text", search_text: "%#{search_text}%").order(updated_at: :desc)
       elsif !country.blank? then
-        Bean.where("country = :country", country: country)
+        Bean.where("country = :country", country: country).order(updated_at: :desc)
       else
-        Bean.all
+        Bean.all.order(updated_at: :desc)
       end
     end
 
