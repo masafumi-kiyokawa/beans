@@ -1,9 +1,10 @@
 import React from "react";
 import type { ReactNode } from "react";
-import { useParams } from "react-router-dom";
+import { Route, Routes, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { fetchRecipeFunction } from "./functions/fetchRecipefunction";
-import { Flex, Heading } from "@chakra-ui/react";
+import EditRecipe from "./EditRecipe";
+import RecipeInfo from "./RecipeInfo";
 
 const RecipeDetail = (): ReactNode => {
   const { id } = useParams();
@@ -17,18 +18,10 @@ const RecipeDetail = (): ReactNode => {
   if (data === undefined) return <div>error</div>;
 
   return (
-    <>
-      <Flex
-        justifyContent="space-between"
-        alignItems="center"
-        mx={5}
-        mt={20}
-        mb={5}
-        px="16px"
-      >
-        <Heading fontSize="3xl">{data.title}</Heading>
-      </Flex>
-    </>
+    <Routes>
+      <Route path="/edit" element={<EditRecipe recipe={data} />} />
+      <Route path="/*" element={<RecipeInfo recipe={data} />} />
+    </Routes>
   );
 };
 

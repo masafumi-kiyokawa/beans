@@ -32,7 +32,7 @@ const App = (): ReactNode => {
           <Routes>
             <Route path="beans/:id/*" element={<BeanDetail />} />
             <Route path="beans/*" element={<BeansGrid />} />
-            <Route path="recipes/:id" element={<RecipeDetail />} />
+            <Route path="recipes/:id/*" element={<RecipeDetail />} />
           </Routes>
         </GridItem>
       </Grid>
