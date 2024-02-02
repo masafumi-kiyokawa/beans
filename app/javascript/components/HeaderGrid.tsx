@@ -6,32 +6,20 @@ import {
   GridItem,
   HStack,
   Heading,
-  IconButton,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
   Show,
   Stack,
-  useColorMode,
   useColorModeValue,
-  useDisclosure,
 } from "@chakra-ui/react";
-import { FaMoon, FaSun } from "react-icons/fa";
-import ColorModeSwitch from "./ColorModeSwitch";
 import SearchInput from "./SearchInput";
-import AddBeanButton from "./AddBeanButton";
-import AddBeanDrawer from "./AddBeanDrawer";
 import { Link } from "react-router-dom";
-import { useBeanQueryContext } from "./contexts/BeanQueryProvider";
-import HamburgerIcon from "./icons/HamburgerIcon";
+import { useBeanQueryContext } from "./providers/BeanQueryProvider";
 import Logo from "./icons/Logo";
-import PlusIcon from "./icons/PlusIcon";
+import AddBeanButton from "./buttons/AddBeanButton";
+import AddBeanIconButton from "./buttons/AddBeanIconButton";
+import ColorModeIconButton from "./buttons/ColorModeIconButton";
 
 const HeaderGrid = (): ReactNode => {
   const bg = useColorModeValue("white", "gray.800");
-  const { colorMode, toggleColorMode } = useColorMode();
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const { setBeanQuery } = useBeanQueryContext();
   const onClick = (): void => {
     setBeanQuery({
@@ -65,36 +53,19 @@ const HeaderGrid = (): ReactNode => {
         </Link>
       </GridItem>
       <GridItem>
-        <HStack h="4.5rem" justifyContent="space-between">
-          <SearchInput />
+        <HStack h="4.5rem" justify="flex-end">
           <Show above="sm">
+            <SearchInput />
+          </Show>
+          <Show above="md">
             <Stack direction="row" spacing={4}>
               <AddBeanButton />
             </Stack>
-            <ColorModeSwitch />
           </Show>
-          <Show below="sm">
-            <Menu>
-              <MenuButton
-                as={IconButton}
-                aria-label="Options"
-                icon={<HamburgerIcon />}
-                variant="outline"
-              />
-              <MenuList>
-                <MenuItem icon={<PlusIcon />} onClick={onOpen}>
-                  Add Bean
-                </MenuItem>
-                <AddBeanDrawer isOpen={isOpen} onClose={onClose} />
-                <MenuItem
-                  icon={colorMode === "light" ? <FaMoon /> : <FaSun />}
-                  onClick={toggleColorMode}
-                >
-                  {colorMode === "light" ? "Dark Mode" : "Light Mode"}
-                </MenuItem>
-              </MenuList>
-            </Menu>
+          <Show below="md">
+            <AddBeanIconButton />
           </Show>
+          <ColorModeIconButton />
         </HStack>
       </GridItem>
     </Grid>

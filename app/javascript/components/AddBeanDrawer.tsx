@@ -24,7 +24,6 @@ import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import type { Bean } from "./types/Bean";
-import { useBeansContext } from "./contexts/BeansProvider";
 import { useNavigate } from "react-router-dom";
 import { beanValidationSchema } from "../validation/beanValidationSchema";
 
@@ -34,7 +33,6 @@ interface Props {
 }
 
 const AddBeanDrawer = ({ isOpen, onClose }: Props): ReactNode => {
-  const { beans, setBeans } = useBeansContext();
   const navigate = useNavigate();
   const {
     control,
@@ -46,17 +44,14 @@ const AddBeanDrawer = ({ isOpen, onClose }: Props): ReactNode => {
     resolver: zodResolver(beanValidationSchema),
   });
   const onSubmit = (data: Bean): void => {
-    console.log(data);
     axios
-      .post("/api/beans", data)
+      .post("/api/beans", { bean: data })
       .then((res) => {
-        setBeans([...beans, res.data]);
         onClose();
         reset();
         navigate(`/beans/${res.data?.id}`);
       })
       .catch((error) => {
-        console.log(error);
         console.log(error);
       });
   };
@@ -65,12 +60,7 @@ const AddBeanDrawer = ({ isOpen, onClose }: Props): ReactNode => {
     <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
       <DrawerOverlay />
       <DrawerContent zIndex={2} overflowY="auto">
-        <form
-          action="post"
-          onSubmit={() => {
-            handleSubmit(onSubmit);
-          }}
-        >
+        <form onSubmit={handleSubmit(onSubmit)}>
           <DrawerCloseButton />
           <DrawerHeader borderBottomWidth="1px">Add a new Bean</DrawerHeader>
           <DrawerBody>
@@ -231,9 +221,7 @@ const AddBeanDrawer = ({ isOpen, onClose }: Props): ReactNode => {
             <Button variant="outline" mr={3} onClick={onClose}>
               Cancel
             </Button>
-            <Button type="submit" colorScheme="blue">
-              Submit
-            </Button>
+            <Button type="submit">Submit</Button>
           </DrawerFooter>
         </form>
       </DrawerContent>

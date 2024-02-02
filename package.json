@@ -8,6 +8,7 @@
     "@hookform/resolvers": "^3.3.4",
     "@hotwired/stimulus": "^3.2.2",
     "@hotwired/turbo-rails": "^7.3.0",
+    "@tanstack/react-query": "^5.18.0",
     "autoprefixer": "^10.4.17",
     "axios": "^1.6.5",
     "country-json": "^1.1.4",

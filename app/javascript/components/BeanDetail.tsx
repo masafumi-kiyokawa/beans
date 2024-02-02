@@ -1,7 +1,6 @@
 import React from "react";
 import type { ReactNode } from "react";
-import { useParams } from "react-router-dom";
-import { useBeansContext } from "./contexts/BeansProvider";
+import { Route, Routes, useParams } from "react-router-dom";
 import {
   Tabs,
   TabList,
@@ -11,45 +10,53 @@ import {
   Heading,
   Flex,
 } from "@chakra-ui/react";
-import type { Bean } from "./types/Bean";
 import RecipeForm from "./RecipeForm";
 import BeanInfo from "./BeanInfo";
+import { useQuery } from "@tanstack/react-query";
+import { fetchBeanFunction } from "./functions/fetchBeanFunction";
 import RecipesList from "./RecipesList";
+import EditBean from "./EditBean";
 
 const BeanDetail = (): ReactNode => {
   const { id } = useParams();
-  const { beans, error } = useBeansContext();
-  if (error) return <div>Error</div>;
-  const bean = beans.find((bean: Bean) => bean.id === id);
-  if (bean === undefined) return <div>Not Found</div>;
+  if (id === undefined) return <div>error</div>;
+  const { data, isError, isLoading } = useQuery({
+    queryKey: ["bean", id],
+    queryFn: () => fetchBeanFunction(id),
+  });
+  if (isError) return <div>Error</div>;
+  if (isLoading) return <div>Loading...</div>;
+  if (data === undefined) return <div>error</div>;
 
   return (
     <>
       <Flex
-        h="4.5rem"
         justifyContent="space-between"
         alignItems="center"
         mx={5}
-        mt={5}
-        p={1}
+        mt={20}
+        px="16px"
       >
-        <Heading fontSize="2xl">{bean?.name}</Heading>
+        <Heading fontSize="3xl">{data?.name}</Heading>
       </Flex>
-      <Tabs m={5}>
+      <Tabs p="16px" colorScheme="white">
         <TabList>
           <Tab>Bean Info</Tab>
           <Tab>Recipes List</Tab>
           <Tab>Add Recipe</Tab>
         </TabList>
         <TabPanels>
-          <TabPanel>
-            <BeanInfo bean={bean} />
+          <TabPanel pr={0}>
+            <Routes>
+              <Route path="/edit" element={<EditBean bean={data} />} />
+              <Route path="/*" element={<BeanInfo bean={data} />} />
+            </Routes>
           </TabPanel>
           <TabPanel>
-            <RecipesList beanId={bean.id} />
+            <RecipesList beanId={data.id} />
           </TabPanel>
           <TabPanel>
-            <RecipeForm beanId={bean.id} />
+            <RecipeForm beanId={data.id} />
           </TabPanel>
         </TabPanels>
       </Tabs>

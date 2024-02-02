@@ -9,7 +9,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { BsSearch } from "react-icons/bs";
-import { useBeanQueryContext } from "./contexts/BeanQueryProvider";
+import { useBeanQueryContext } from "./providers/BeanQueryProvider";
 import { useNavigate } from "react-router-dom";
 
 const SearchInput = (): ReactNode => {

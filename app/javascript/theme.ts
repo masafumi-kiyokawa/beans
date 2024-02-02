@@ -6,6 +6,9 @@ const theme = extendTheme({
     useSystemColorMode: false,
   },
   styles: {},
+  colors: {
+    beans: "#5f370e",
+  },
 });
 
 export default theme;

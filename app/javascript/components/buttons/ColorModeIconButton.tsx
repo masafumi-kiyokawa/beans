@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import { IconButton, useColorMode } from "@chakra-ui/react";
 import { FaMoon, FaSun } from "react-icons/fa";
 
-const ColorModeSwitch = (): ReactNode => {
+const ColorModeIconButton = (): ReactNode => {
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
@@ -17,4 +17,4 @@ const ColorModeSwitch = (): ReactNode => {
   );
 };
 
-export default ColorModeSwitch;
+export default ColorModeIconButton;

@@ -6,11 +6,7 @@ interface Props {
   children: ReactNode;
 }
 const RecipesCardContainer = ({ children }: Props): ReactNode => {
-  return (
-    <Box mb={5} mx={5}>
-      {children}
-    </Box>
-  );
+  return <Box mb={5}>{children}</Box>;
 };
 
 export default RecipesCardContainer;

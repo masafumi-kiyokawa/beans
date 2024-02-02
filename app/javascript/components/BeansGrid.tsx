@@ -4,26 +4,30 @@ import { Flex, Heading, Text } from "@chakra-ui/react";
 import BeanCard from "./BeansCard";
 import BeansCardContainer from "./BeansCardContainer";
 import BeansCardSkeleton from "./BeansCardSkeleton";
-import { useBeanQueryContext } from "./contexts/BeanQueryProvider";
-import { useBeansContext } from "./contexts/BeansProvider";
+import { useBeanQueryContext } from "./providers/BeanQueryProvider";
+import { useQuery } from "@tanstack/react-query";
+import { fetchBeansFunction } from "./functions/fetchBeansFuction";
 
 const BeansGrid = (): ReactNode => {
   const { beanQuery } = useBeanQueryContext();
-  const { beans, error, isLoading } = useBeansContext();
+  const { data, error, isError, isLoading } = useQuery({
+    queryKey: ["beans", beanQuery],
+    queryFn: () => fetchBeansFunction(beanQuery),
+  });
   const skeletons = [1, 2, 3];
 
-  if (error) return <Text>{error}</Text>;
+  if (isError) return <Text>{error.message}</Text>;
   return (
     <>
       <Flex
-        h="4.5rem"
         justifyContent="space-between"
         alignItems="center"
         mx={5}
-        mt={5}
-        p={1}
+        mt={20}
+        mb={5}
+        px="16px"
       >
-        <Heading fontSize="2xl">{beanQuery.country} Beans</Heading>
+        <Heading fontSize="3xl">{beanQuery.country} Beans</Heading>
       </Flex>
       {isLoading &&
         skeletons.map((skeletons) => (
@@ -31,7 +35,7 @@ const BeansGrid = (): ReactNode => {
             <BeansCardSkeleton />
           </BeansCardContainer>
         ))}
-      {beans.map((bean) => (
+      {data?.results.map((bean) => (
         <BeansCardContainer key={bean.id}>
           <BeanCard bean={bean} />
         </BeansCardContainer>
