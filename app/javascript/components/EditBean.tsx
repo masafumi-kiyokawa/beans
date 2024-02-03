@@ -76,7 +76,7 @@ const EditBean = ({ bean, refetch }: Props): ReactNode => {
         </Flex>
       </HStack>
       <Divider mb={5} />
-      <Stack spacing="24px" mr="16px">
+      <Stack spacing="14px" mr="16px">
         <Box>
           <FormControl isInvalid={!!errors.name}>
             <FormLabel htmlFor="name">Name</FormLabel>

@@ -132,7 +132,7 @@ const RecipeForm = ({ beanId }: Props): ReactNode => {
       </Flex>
       <Divider mb={5} />
       <form method="post" onSubmit={handleSubmit(onSubmit)} noValidate>
-        <Stack spacing="24px">
+        <Stack spacing="14px">
           <Box>
             <FormControl isInvalid={!!errors.title}>
               <FormLabel htmlFor="title">Title</FormLabel>
