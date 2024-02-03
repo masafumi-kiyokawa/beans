@@ -41,6 +41,7 @@ const SearchInput = (): ReactNode => {
         if (ref.current) onSearch(ref.current.value);
         navigte("/beans");
       }}
+      style={{ width: "100%", marginLeft: "20px" }}
     >
       <InputGroup>
         <InputLeftElement>
