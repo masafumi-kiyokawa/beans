@@ -1,13 +1,13 @@
 import React from "react";
 import type { ReactNode } from "react";
 import { Routes, Route } from "react-router-dom";
-import HeaderGrid from "./components/HeaderGrid";
-import { useBeanQueryContext } from "./components/providers/BeanQueryProvider";
-import { Box, Grid, GridItem, Show } from "@chakra-ui/react";
-import BeansGrid from "./components/BeansGrid";
-import NavGrid from "./components/NavGrid";
-import BeanDetail from "./components/BeanDetail";
-import RecipeDetail from "./components/RecipeDetail";
+import { Grid, Show, GridItem, Box } from "@chakra-ui/react";
+import BeanDetail from "./BeanDetail";
+import BeansGrid from "./BeansGrid";
+import NavGrid from "./NavGrid";
+import RecipeDetail from "./RecipeDetail";
+import { useBeanQueryContext } from "./providers/BeanQueryProvider";
+import HeaderGrid from "./HeaderGrid";
 
 const App = (): ReactNode => {
   const { beanQuery, setBeanQuery } = useBeanQueryContext();

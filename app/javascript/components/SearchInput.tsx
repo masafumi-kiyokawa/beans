@@ -42,7 +42,7 @@ const SearchInput = (): ReactNode => {
         navigte("/beans");
       }}
     >
-      <InputGroup w="100%" mr="20px">
+      <InputGroup>
         <InputLeftElement>
           <BsSearch />
         </InputLeftElement>
