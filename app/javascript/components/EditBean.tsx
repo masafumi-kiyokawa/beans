@@ -27,9 +27,10 @@ import countries from "../data/countries";
 
 interface Props {
   bean: Bean;
+  refetch: () => void;
 }
 
-const EditBean = ({ bean }: Props): ReactNode => {
+const EditBean = ({ bean, refetch }: Props): ReactNode => {
   const navigate = useNavigate();
   const {
     control,
@@ -43,6 +44,7 @@ const EditBean = ({ bean }: Props): ReactNode => {
     axios
       .patch(`/api/beans/${bean.id}`, { bean: data })
       .then((res) => {
+        refetch();
         navigate(`/beans/${res.data?.id}`);
       })
       .catch((error) => {

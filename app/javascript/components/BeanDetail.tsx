@@ -20,7 +20,7 @@ import EditBean from "./EditBean";
 const BeanDetail = (): ReactNode => {
   const { id } = useParams();
   if (id === undefined) return <div>error</div>;
-  const { data, isError, isLoading } = useQuery({
+  const { data, isError, isLoading, refetch } = useQuery({
     queryKey: ["bean", id],
     queryFn: () => fetchBeanFunction(id),
   });
@@ -48,7 +48,10 @@ const BeanDetail = (): ReactNode => {
         <TabPanels>
           <TabPanel pr={0}>
             <Routes>
-              <Route path="/edit" element={<EditBean bean={data} />} />
+              <Route
+                path="/edit"
+                element={<EditBean bean={data} refetch={refetch} />}
+              />
               <Route path="/*" element={<BeanInfo bean={data} />} />
             </Routes>
           </TabPanel>

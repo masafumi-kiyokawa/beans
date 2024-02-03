@@ -30,9 +30,10 @@ import grind_sizes from "../data/grind_sizes";
 
 interface Props {
   recipe: Recipe;
+  refetch: () => void;
 }
 
-const EditRecipe = ({ recipe }: Props): ReactNode => {
+const EditRecipe = ({ recipe, refetch }: Props): ReactNode => {
   const {
     getInputProps: getBeanQuantityInputProps,
     getIncrementButtonProps: getBeanQuantityIncrementButtonProps1,
@@ -119,6 +120,7 @@ const EditRecipe = ({ recipe }: Props): ReactNode => {
     axios
       .put(`/api/recipes/${recipe.id}`, { recipe: data })
       .then((res) => {
+        refetch();
         navigate(`/recipes/${res.data?.id}`);
       })
       .catch((error) => {
