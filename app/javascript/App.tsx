@@ -12,6 +12,7 @@ import RecipeDetail from "./components/RecipeDetail";
 const App = (): ReactNode => {
   const { beanQuery, setBeanQuery } = useBeanQueryContext();
   return (
+<<<<<<< HEAD
     <Box maxW="1440px" mx="auto">
       <HeaderGrid />
       <Grid
@@ -37,6 +38,17 @@ const App = (): ReactNode => {
         </GridItem>
       </Grid>
     </Box>
+=======
+    <div className="grid md:grid-cols-2">
+      <div className="md:col-span-2 bg-blue-200">Content A</div>
+
+      <div className="md:col-span-1 lg:w-200 bg-green-200 hidden md:block">
+        Content B
+      </div>
+
+      <div className="md:col-span-1 lg:flex- bg-yellow-200">Content C</div>
+    </div>
+>>>>>>> 160b883dfffc778a8ea174f45156c9da3bf12da9
   );
 };
 

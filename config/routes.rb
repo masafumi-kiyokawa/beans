@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+<<<<<<< HEAD
   root to: redirect('/beans')
 
   get 'beans', to: 'site#index'
@@ -14,4 +15,7 @@ Rails.application.routes.draw do
     resources :beans, only: %i[index show create destroy update]
     resources :recipes, only: %i[index show create destroy update]
   end
+=======
+  root "beans#index"
+>>>>>>> 160b883dfffc778a8ea174f45156c9da3bf12da9
 end
