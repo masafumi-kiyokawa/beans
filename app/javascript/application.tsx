@@ -5,7 +5,6 @@ import ReactDOM from "react-dom/client";
 import { CSSReset, ChakraProvider, ColorModeScript } from "@chakra-ui/react";
 import App from "./App";
 import theme from "./theme";
-import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BeanQueryProvider } from "./components/providers/BeanQueryProvider";
