@@ -2,7 +2,6 @@ import React from "react";
 import { ReactNode } from "react";
 import type { Recipe } from "./types/Recipe";
 import { Flex, Heading, Divider, Box } from "@chakra-ui/react";
-import { data } from "autoprefixer";
 import DeleteRecipeButton from "./buttons/DeleteRecipeButton";
 import EditRecipeButton from "./buttons/EditRecipeButton";
 
@@ -21,6 +20,17 @@ const RecipeInfo = ({ recipe }: Props): ReactNode => {
       </Flex>
       <Divider mb={5} />
       <Box>
+        <ul>
+          <li>{recipe.title}</li>
+          <li>{recipe.bean_quantity}</li>
+          <li>{recipe.grind}</li>
+          <li>{recipe.duration}</li>
+          <li>{recipe.tempereture}</li>
+          <li>{recipe.water_quantity}</li>
+          <li>{recipe.note}</li>
+          <li>{recipe.created_at}</li>
+          <li>{recipe.updated_at}</li>
+        </ul>
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Enim, itaque
         maxime praesentium officiis, asperiores nostrum nobis rem rerum quia
         molestias aliquam incidunt nesciunt! Quae, nemo. Perferendis excepturi

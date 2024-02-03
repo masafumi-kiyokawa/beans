@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import type { ReactNode } from "react";
 import type { Recipe } from "./types/Recipe";
 import { Controller, useForm } from "react-hook-form";
@@ -36,6 +36,7 @@ const RecipeForm = ({ beanId }: Props): ReactNode => {
     getInputProps: getBeanQuantityInputProps,
     getIncrementButtonProps: getBeanQuantityIncrementButtonProps1,
     getDecrementButtonProps: getBeanQuantityDecrementButtonProps1,
+    valueAsNumber: beanQuantityValueAsNumber,
   } = useNumberInput({
     step: 0.1,
     defaultValue: 16,
@@ -43,6 +44,10 @@ const RecipeForm = ({ beanId }: Props): ReactNode => {
     max: 50,
     precision: 1,
   });
+
+  useEffect(() => {
+    setValue("bean_quantity", beanQuantityValueAsNumber);
+  }, [beanQuantityValueAsNumber]);
 
   const beanQuantityInput = getBeanQuantityInputProps();
   const beanQuantityInc = getBeanQuantityIncrementButtonProps1();
@@ -52,6 +57,7 @@ const RecipeForm = ({ beanId }: Props): ReactNode => {
     getInputProps: getTemperetureInputProps,
     getIncrementButtonProps: getTemperetureIncrementButtonProps1,
     getDecrementButtonProps: getTemperetureDecrementButtonProps1,
+    valueAsNumber: temperetureValueAsNumber,
   } = useNumberInput({
     step: 1,
     defaultValue: 90,
@@ -59,6 +65,10 @@ const RecipeForm = ({ beanId }: Props): ReactNode => {
     max: 100,
     precision: 0,
   });
+
+  useEffect(() => {
+    setValue("tempereture", temperetureValueAsNumber);
+  }, [temperetureValueAsNumber]);
 
   const temperetureInput = getTemperetureInputProps();
   const temperetureInc = getTemperetureIncrementButtonProps1();
@@ -68,6 +78,7 @@ const RecipeForm = ({ beanId }: Props): ReactNode => {
     getInputProps: getWaterQuantityInputProps,
     getIncrementButtonProps: getWaterQuantityIncrementButtonProps1,
     getDecrementButtonProps: getWaterQuantityDecrementButtonProps1,
+    valueAsNumber: waterQuantityValueAsNumber,
   } = useNumberInput({
     step: 10,
     defaultValue: 250,
@@ -75,6 +86,10 @@ const RecipeForm = ({ beanId }: Props): ReactNode => {
     max: 1000,
     precision: 0,
   });
+
+  useEffect(() => {
+    setValue("water_quantity", waterQuantityValueAsNumber);
+  }, [waterQuantityValueAsNumber]);
 
   const waterQuantityInput = getWaterQuantityInputProps();
   const waterQuantityInc = getWaterQuantityIncrementButtonProps1();
@@ -86,6 +101,7 @@ const RecipeForm = ({ beanId }: Props): ReactNode => {
     control,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors },
   } = useForm<Recipe>({
     mode: "onChange",

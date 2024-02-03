@@ -15,7 +15,6 @@ export const fetchBeansFunction = async (beanQuery: BeanQuery) => {
         search_text: beanQuery.searchText,
       },
     });
-    console.log(response.data.results);
 
     return response.data;
   } catch (error) {

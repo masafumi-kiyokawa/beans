@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Stack,
   FormControl,
@@ -37,13 +37,18 @@ const EditRecipe = ({ recipe }: Props): ReactNode => {
     getInputProps: getBeanQuantityInputProps,
     getIncrementButtonProps: getBeanQuantityIncrementButtonProps1,
     getDecrementButtonProps: getBeanQuantityDecrementButtonProps1,
+    valueAsNumber: beanQuantityValueAsNumber,
   } = useNumberInput({
     step: 0.1,
-    defaultValue: 16,
+    defaultValue: recipe.bean_quantity,
     min: 5,
     max: 50,
     precision: 1,
   });
+
+  useEffect(() => {
+    setValue("bean_quantity", beanQuantityValueAsNumber);
+  }, [beanQuantityValueAsNumber]);
 
   const beanQuantityInput = getBeanQuantityInputProps();
   const beanQuantityInc = getBeanQuantityIncrementButtonProps1();
@@ -53,13 +58,18 @@ const EditRecipe = ({ recipe }: Props): ReactNode => {
     getInputProps: getTemperetureInputProps,
     getIncrementButtonProps: getTemperetureIncrementButtonProps1,
     getDecrementButtonProps: getTemperetureDecrementButtonProps1,
+    valueAsNumber: temperetureValueAsNumber,
   } = useNumberInput({
     step: 1,
-    defaultValue: 90,
+    defaultValue: recipe.tempereture,
     min: 0,
     max: 100,
     precision: 0,
   });
+
+  useEffect(() => {
+    setValue("tempereture", temperetureValueAsNumber);
+  }, [temperetureValueAsNumber]);
 
   const temperetureInput = getTemperetureInputProps();
   const temperetureInc = getTemperetureIncrementButtonProps1();
@@ -69,13 +79,18 @@ const EditRecipe = ({ recipe }: Props): ReactNode => {
     getInputProps: getWaterQuantityInputProps,
     getIncrementButtonProps: getWaterQuantityIncrementButtonProps1,
     getDecrementButtonProps: getWaterQuantityDecrementButtonProps1,
+    valueAsNumber: waterQuantityValueAsNumber,
   } = useNumberInput({
     step: 10,
-    defaultValue: 250,
+    defaultValue: recipe.water_quantity,
     min: 50,
     max: 1000,
     precision: 0,
   });
+
+  useEffect(() => {
+    setValue("water_quantity", waterQuantityValueAsNumber);
+  }, [waterQuantityValueAsNumber]);
 
   const waterQuantityInput = getWaterQuantityInputProps();
   const waterQuantityInc = getWaterQuantityIncrementButtonProps1();
@@ -94,6 +109,7 @@ const EditRecipe = ({ recipe }: Props): ReactNode => {
   const {
     control,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<Recipe>({
     mode: "onChange",
@@ -101,7 +117,7 @@ const EditRecipe = ({ recipe }: Props): ReactNode => {
   });
   const onSubmit = (data: Recipe): void => {
     axios
-      .patch(`/api/recipes/${recipe.id}`, { recipe: data })
+      .put(`/api/recipes/${recipe.id}`, { recipe: data })
       .then((res) => {
         navigate(`/recipes/${res.data?.id}`);
       })
@@ -112,7 +128,6 @@ const EditRecipe = ({ recipe }: Props): ReactNode => {
   const onCancel = () => {
     navigate(`/recipes/${recipe.id}`);
   };
-
   return (
     <form method="post" onSubmit={handleSubmit(onSubmit)} noValidate>
       <Flex justifyContent="space-between" alignItems="center" mt={20} mb={5}>
@@ -155,32 +170,32 @@ const EditRecipe = ({ recipe }: Props): ReactNode => {
         </Box>
         <Box>
           <FormControl isInvalid={!!errors.bean_quantity}>
-            <FormLabel htmlFor="bean_quantity">Bean Quantity</FormLabel>
-            <Controller
-              name="bean_quantity"
-              control={control}
-              defaultValue={Number(recipe.bean_quantity)}
-              render={({ field }) => (
-                <HStack maxW="240px">
-                  <InputGroup>
-                    <Button {...beanQuantityInc} mr={5}>
-                      +
-                    </Button>
+            <FormLabel htmlFor="bean_quantity">Bean Quantity</FormLabel>{" "}
+            <HStack maxW="240px">
+              <InputGroup>
+                <Button {...beanQuantityInc} mr={5}>
+                  +
+                </Button>
+                <Controller
+                  name="bean_quantity"
+                  control={control}
+                  defaultValue={Number(recipe.bean_quantity)}
+                  render={({ field }) => (
                     <Input
                       {...field}
                       {...beanQuantityInput}
                       id="bean_quantity"
                     />
-                    <InputRightAddon>
-                      <Center w="10px">g</Center>
-                    </InputRightAddon>
-                    <Button {...beanQuantityDec} ml={5}>
-                      -
-                    </Button>
-                  </InputGroup>
-                </HStack>
-              )}
-            />
+                  )}
+                />
+                <InputRightAddon>
+                  <Center w="10px">g</Center>
+                </InputRightAddon>
+                <Button {...beanQuantityDec} ml={5}>
+                  -
+                </Button>
+              </InputGroup>
+            </HStack>
             {errors.bean_quantity && (
               <Text fontSize="sm" color="red">
                 {errors.bean_quantity?.message as ReactNode}
@@ -242,7 +257,7 @@ const EditRecipe = ({ recipe }: Props): ReactNode => {
         </Box>
         <Box>
           <FormControl isInvalid={!!errors.tempereture}>
-            <FormLabel htmlFor="tempereture">Water Tempeleture</FormLabel>
+            <FormLabel htmlFor="tempereture">Water Tempereture</FormLabel>
             <Controller
               name="tempereture"
               control={control}

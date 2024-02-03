@@ -4,7 +4,6 @@ import type { Recipe } from "../types/Recipe";
 export const fetchRecipeFunction = async (id: string) => {
   try {
     const response = await axios.get<Recipe>(`/api/recipes/${id}`);
-    console.log("fetchRecipeFunction is called");
 
     return response.data;
   } catch (error) {
