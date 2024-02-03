@@ -1,93 +1,148 @@
 import React from "react";
 import { ReactNode } from "react";
 import type { Recipe } from "./types/Recipe";
-import { Flex, Heading, Divider, Box } from "@chakra-ui/react";
+import {
+  Flex,
+  Heading,
+  Divider,
+  Box,
+  Stack,
+  Text,
+  StackDivider,
+  Link as ChakraLink,
+  Show,
+} from "@chakra-ui/react";
 import DeleteRecipeButton from "./buttons/DeleteRecipeButton";
 import EditRecipeButton from "./buttons/EditRecipeButton";
+import { Link as ReactRouterLink } from "react-router-dom";
 
 interface Props {
   recipe: Recipe;
 }
 const RecipeInfo = ({ recipe }: Props): ReactNode => {
+  const formatDuration = (duration: string): string => {
+    const date = new Date(duration);
+    const hours = String(date.getUTCHours());
+    const minutes = String(date.getUTCMinutes());
+    const seconds = String(date.getUTCSeconds());
+    return `${hours}h ${minutes}min ${seconds}sec`;
+  };
+  const formatDate = (target: string): string => {
+    const date = new Date(target);
+    const year = String(date.getUTCFullYear());
+    const month = String(date.getUTCMonth());
+    const day = String(date.getUTCDay());
+    return `${year}/${month}/${day}`;
+  };
+
   return (
     <>
-      <Flex justifyContent="space-between" alignItems="center" mt={20} mb={5}>
-        <Heading fontSize="3xl">{recipe.title}</Heading>
+      <Box h="60px" justifyContent="">
+        <ChakraLink
+          color="gray.400"
+          as={ReactRouterLink}
+          to={`/beans/${recipe.bean_id}`}
+          fontWeight="bold"
+          position="relative"
+          top="40px"
+        >
+          {"<< "}Back to previous page
+        </ChakraLink>
+      </Box>
+      <Flex
+        justifyContent="space-between"
+        alignItems="center"
+        mt="20px"
+        mb="20px"
+      >
+        <Heading size="xl">{recipe.title}</Heading>
         <Flex justify="flex-end">
           <EditRecipeButton id={recipe.id} />
           <DeleteRecipeButton recipe={recipe} />
         </Flex>
       </Flex>
       <Divider mb={5} />
-      <Box>
-        <ul>
-          <li>{recipe.title}</li>
-          <li>{recipe.bean_quantity}</li>
-          <li>{recipe.grind}</li>
-          <li>{recipe.duration}</li>
-          <li>{recipe.tempereture}</li>
-          <li>{recipe.water_quantity}</li>
-          <li>{recipe.note}</li>
-          <li>{recipe.created_at}</li>
-          <li>{recipe.updated_at}</li>
-        </ul>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Enim, itaque
-        maxime praesentium officiis, asperiores nostrum nobis rem rerum quia
-        molestias aliquam incidunt nesciunt! Quae, nemo. Perferendis excepturi
-        nostrum, earum eum modi, ullam totam tenetur eligendi eius reprehenderit
-        similique nemo at maiores voluptates hic, voluptatem atque iure
-        necessitatibus sequi. Asperiores porro at provident officia esse vitae
-        sapiente quod magnam consequuntur a eaque necessitatibus unde
-        praesentium ut perferendis dolor saepe temporibus voluptas possimus
-        distinctio quis, doloremque inventore quas. Beatae consequuntur
-        recusandae sunt itaque. Quam aspernatur nesciunt fugiat necessitatibus
-        ab optio dignissimos. Doloremque quis placeat molestias at et
-        dignissimos, ab ipsa incidunt tempora natus voluptatum? Error earum
-        rerum eveniet architecto vel nostrum, doloribus ad neque dolorem
-        obcaecati, veniam expedita corporis modi maxime laudantium iste laborum
-        fugit eos! Enim, aut obcaecati quaerat deleniti nesciunt fuga velit
-        vitae voluptatum, molestiae recusandae similique rem aspernatur labore?
-        Necessitatibus adipisci laudantium ipsum tempora! Beatae quis sapiente
-        aspernatur quo rerum molestias fugit dolorum, quod consequatur,
-        recusandae, obcaecati excepturi possimus deserunt quas doloribus nam
-        officiis ipsa maxime eum. Corrupti adipisci, perferendis est, rerum
-        vitae dolore reiciendis amet ipsa, nulla quaerat quod velit
-        necessitatibus repellat alias. Dignissimos rerum ducimus autem dolores
-        eaque repellendus nobis. Quam at laudantium quae eum minus excepturi,
-        quia tempore dolores consequatur, culpa numquam inventore doloribus
-        temporibus, officiis quis repudiandae aliquid fuga sapiente? Expedita
-        similique, porro autem in hic, ipsa quo atque facilis, saepe aspernatur
-        dolore corporis molestias optio quod adipisci laboriosam placeat labore
-        magnam. Et quasi unde ab officiis dolorum voluptate vitae aliquam ipsum
-        nesciunt, libero similique eveniet dolores perferendis nam hic adipisci
-        beatae quis natus? Illo ex facilis libero ad eos voluptate impedit,
-        quidem harum nihil at tempore incidunt recusandae laboriosam id eius
-        officia error cupiditate odio quasi ipsa aperiam tenetur nobis iusto
-        magnam. Repellat ea voluptas totam temporibus veniam aut, cumque dolorum
-        accusamus possimus eos quidem, laudantium reiciendis distinctio vel
-        exercitationem nam consectetur debitis ut iusto! Nihil, dicta nostrum?
-        Temporibus amet, nam explicabo deserunt eos fugit voluptates quae ad
-        eligendi minima doloribus impedit non dolore, quasi recusandae
-        praesentium! Sed nam minima ullam quis, libero animi esse in atque
-        inventore ipsam ducimus eius quos, laboriosam quod, veritatis vero
-        nesciunt nisi. Adipisci saepe amet natus vitae quibusdam molestiae illo
-        itaque incidunt nobis deleniti ab obcaecati esse, quisquam nostrum
-        voluptatum, nesciunt harum optio neque minus voluptates perspiciatis
-        aliquam quae quo maxime. Vitae vel dicta cum laudantium nihil, facere
-        quas nesciunt eaque voluptates consequatur magni debitis. Delectus vitae
-        illum atque soluta iste error nesciunt fugit laboriosam perspiciatis,
-        dolor quam veritatis ullam accusantium alias obcaecati quas minus
-        voluptates accusamus quasi temporibus? Aut, quaerat adipisci. Dolore,
-        praesentium! Dolorem consequatur laborum, sequi nulla veniam tenetur
-        excepturi quas quos illo doloribus facilis dicta repellendus officia
-        suscipit voluptas molestias, perferendis odit aspernatur illum iusto!
-        Voluptates neque est expedita cumque sapiente incidunt nostrum magni
-        excepturi officiis dolores ipsam in vitae nam dolore earum inventore,
-        facere, quibusdam laboriosam perferendis natus eum tempore harum enim
-        dicta. Asperiores repellat cupiditate praesentium quod sunt accusamus
-        cum, quis amet odio ut nostrum ullam! Natus possimus minus fugiat sequi
-        consequuntur provident?
-      </Box>
+      <Flex direction={{ base: "column", md: "row" }}>
+        <Stack divider={<StackDivider />} spacing="4" flex={2} mr={4}>
+          <Box>
+            <Heading size="sm" textTransform="uppercase">
+              Title
+            </Heading>
+            <Text pt="2" fontSize="md">
+              {recipe.title}
+            </Text>
+          </Box>
+          <Box>
+            <Heading size="sm" textTransform="uppercase">
+              Grind Size
+            </Heading>
+            <Text pt="2" fontSize="md">
+              {recipe.grind}
+            </Text>
+          </Box>
+          <Box>
+            <Heading size="sm" textTransform="uppercase">
+              Bean Quantity
+            </Heading>
+            <Text pt="2" fontSize="md">
+              {recipe.bean_quantity}g
+            </Text>
+          </Box>
+          <Box>
+            <Heading size="sm" textTransform="uppercase">
+              Water Tempereture
+            </Heading>
+            <Text pt="2" fontSize="md">
+              {recipe.tempereture}°C
+            </Text>
+          </Box>
+          <Box>
+            <Heading size="sm" textTransform="uppercase">
+              Water Quantity
+            </Heading>
+            <Text pt="2" fontSize="md">
+              {recipe.water_quantity}g
+            </Text>
+          </Box>
+          <Box>
+            <Heading size="sm" textTransform="uppercase">
+              Duration
+            </Heading>
+            <Text pt="2" fontSize="md">
+              {formatDuration(recipe.duration)}
+            </Text>
+          </Box>
+        </Stack>
+        <Stack divider={<StackDivider />} spacing="4" flex={3} mr={4}>
+          <Box>
+            <Show below="md">
+              <Divider my="16px"></Divider>
+            </Show>
+            <Heading size="sm" textTransform="uppercase">
+              Created At
+            </Heading>
+            <Text pt="2" fontSize="md">
+              {formatDate(recipe.created_at)}
+            </Text>
+          </Box>
+          <Box>
+            <Heading size="sm" textTransform="uppercase">
+              Updated At
+            </Heading>
+            <Text pt="2" fontSize="md">
+              {formatDate(recipe.updated_at)}
+            </Text>
+          </Box>
+          <Box>
+            <Heading size="sm" textTransform="uppercase">
+              Note
+            </Heading>
+            <Text pt="2" fontSize="md">
+              {recipe.note}
+            </Text>
+          </Box>
+        </Stack>
+      </Flex>
     </>
   );
 };

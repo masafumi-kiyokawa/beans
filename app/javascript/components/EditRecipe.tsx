@@ -18,6 +18,7 @@ import {
   Flex,
   Heading,
   Show,
+  ButtonGroup,
 } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { ReactNode } from "react";
@@ -132,8 +133,13 @@ const EditRecipe = ({ recipe, refetch }: Props): ReactNode => {
   };
   return (
     <form method="post" onSubmit={handleSubmit(onSubmit)} noValidate>
-      <Flex justifyContent="space-between" alignItems="center" mt={20} mb={5}>
-        <Heading fontSize="3xl">{recipe.title}</Heading>
+      <Flex
+        justifyContent="space-between"
+        alignItems="center"
+        mt="80px"
+        mb="20px"
+      >
+        <Heading size="xl">{recipe.title}</Heading>
         <Flex justify="flex-end">
           <Show above="sm">
             <Button variant="outline" mr={4} onClick={onCancel} w="105px">
@@ -146,7 +152,7 @@ const EditRecipe = ({ recipe, refetch }: Props): ReactNode => {
         </Flex>
       </Flex>
       <Divider mb={5} />
-      <Stack spacing="24px">
+      <Stack spacing="14px">
         <Box>
           <FormControl isInvalid={!!errors.title}>
             <FormLabel htmlFor="title">Title</FormLabel>
@@ -166,6 +172,33 @@ const EditRecipe = ({ recipe, refetch }: Props): ReactNode => {
             {errors.title && (
               <Text fontSize="sm" color="red">
                 {errors.title?.message as ReactNode}
+              </Text>
+            )}
+          </FormControl>
+        </Box>
+        <Box>
+          <FormControl isInvalid={!!errors.grind}>
+            <FormLabel htmlFor="grind">Grind Size</FormLabel>
+            <Controller
+              name="grind"
+              control={control}
+              defaultValue={recipe.grind}
+              render={({ field }) => (
+                <Select {...field} id="grind" maxW="240px">
+                  <option value=""></option>
+                  {grind_sizes.map(
+                    (value): ReactNode => (
+                      <option key={value} value={value}>
+                        {value}
+                      </option>
+                    )
+                  )}
+                </Select>
+              )}
+            />
+            {errors.grind && (
+              <Text fontSize="sm" color="red">
+                {errors.grind?.message as ReactNode}
               </Text>
             )}
           </FormControl>
@@ -201,58 +234,6 @@ const EditRecipe = ({ recipe, refetch }: Props): ReactNode => {
             {errors.bean_quantity && (
               <Text fontSize="sm" color="red">
                 {errors.bean_quantity?.message as ReactNode}
-              </Text>
-            )}
-          </FormControl>
-        </Box>
-        <Box>
-          <FormControl isInvalid={!!errors.grind}>
-            <FormLabel htmlFor="grind">Grind Size</FormLabel>
-            <Controller
-              name="grind"
-              control={control}
-              defaultValue={recipe.grind}
-              render={({ field }) => (
-                <Select {...field} id="grind" maxW="240px">
-                  <option value=""></option>
-                  {grind_sizes.map(
-                    (value): ReactNode => (
-                      <option key={value} value={value}>
-                        {value}
-                      </option>
-                    )
-                  )}
-                </Select>
-              )}
-            />
-            {errors.grind && (
-              <Text fontSize="sm" color="red">
-                {errors.grind?.message as ReactNode}
-              </Text>
-            )}
-          </FormControl>
-        </Box>
-        <Box>
-          <FormControl isInvalid={!!errors.duration}>
-            <FormLabel htmlFor="duration">Duration</FormLabel>
-            <Controller
-              name="duration"
-              control={control}
-              defaultValue={formatDuration(recipe.duration)}
-              render={({ field }) => (
-                <Input
-                  {...field}
-                  id="duration"
-                  placeholder="Please enter duration"
-                  type="time"
-                  step="1"
-                  maxW="240px"
-                />
-              )}
-            />
-            {errors.duration && (
-              <Text fontSize="sm" color="red">
-                {errors.duration?.message as ReactNode}
               </Text>
             )}
           </FormControl>
@@ -319,6 +300,31 @@ const EditRecipe = ({ recipe, refetch }: Props): ReactNode => {
             {errors.water_quantity && (
               <Text fontSize="sm" color="red">
                 {errors.water_quantity?.message as ReactNode}
+              </Text>
+            )}
+          </FormControl>
+        </Box>
+        <Box>
+          <FormControl isInvalid={!!errors.duration}>
+            <FormLabel htmlFor="duration">Duration</FormLabel>
+            <Controller
+              name="duration"
+              control={control}
+              defaultValue={formatDuration(recipe.duration)}
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  id="duration"
+                  placeholder="Please enter duration"
+                  type="time"
+                  step="1"
+                  maxW="240px"
+                />
+              )}
+            />
+            {errors.duration && (
+              <Text fontSize="sm" color="red">
+                {errors.duration?.message as ReactNode}
               </Text>
             )}
           </FormControl>

@@ -157,6 +157,33 @@ const RecipeForm = ({ beanId }: Props): ReactNode => {
             </FormControl>
           </Box>
           <Box>
+            <FormControl isInvalid={!!errors.grind}>
+              <FormLabel htmlFor="grind">Grind Size</FormLabel>
+              <Controller
+                name="grind"
+                control={control}
+                defaultValue=""
+                render={({ field }) => (
+                  <Select {...field} id="grind" maxW="240px">
+                    <option value=""></option>
+                    {grind_sizes.map(
+                      (value): ReactNode => (
+                        <option key={value} value={value}>
+                          {value}
+                        </option>
+                      )
+                    )}
+                  </Select>
+                )}
+              />
+              {errors.grind && (
+                <Text fontSize="sm" color="red">
+                  {errors.grind?.message as ReactNode}
+                </Text>
+              )}
+            </FormControl>
+          </Box>
+          <Box>
             <FormControl isInvalid={!!errors.bean_quantity}>
               <FormLabel htmlFor="bean_quantity">Bean Quantity</FormLabel>
               <Controller
@@ -187,58 +214,6 @@ const RecipeForm = ({ beanId }: Props): ReactNode => {
               {errors.bean_quantity && (
                 <Text fontSize="sm" color="red">
                   {errors.bean_quantity?.message as ReactNode}
-                </Text>
-              )}
-            </FormControl>
-          </Box>
-          <Box>
-            <FormControl isInvalid={!!errors.grind}>
-              <FormLabel htmlFor="grind">Grind Size</FormLabel>
-              <Controller
-                name="grind"
-                control={control}
-                defaultValue=""
-                render={({ field }) => (
-                  <Select {...field} id="grind" maxW="240px">
-                    <option value=""></option>
-                    {grind_sizes.map(
-                      (value): ReactNode => (
-                        <option key={value} value={value}>
-                          {value}
-                        </option>
-                      )
-                    )}
-                  </Select>
-                )}
-              />
-              {errors.grind && (
-                <Text fontSize="sm" color="red">
-                  {errors.grind?.message as ReactNode}
-                </Text>
-              )}
-            </FormControl>
-          </Box>
-          <Box>
-            <FormControl isInvalid={!!errors.duration}>
-              <FormLabel htmlFor="duration">Duration</FormLabel>
-              <Controller
-                name="duration"
-                control={control}
-                defaultValue="00:03:00"
-                render={({ field }) => (
-                  <Input
-                    {...field}
-                    id="duration"
-                    placeholder="Please enter duration"
-                    type="time"
-                    step="1"
-                    maxW="240px"
-                  />
-                )}
-              />
-              {errors.duration && (
-                <Text fontSize="sm" color="red">
-                  {errors.duration?.message as ReactNode}
                 </Text>
               )}
             </FormControl>
@@ -309,6 +284,31 @@ const RecipeForm = ({ beanId }: Props): ReactNode => {
               {errors.water_quantity && (
                 <Text fontSize="sm" color="red">
                   {errors.water_quantity?.message as ReactNode}
+                </Text>
+              )}
+            </FormControl>
+          </Box>
+          <Box>
+            <FormControl isInvalid={!!errors.duration}>
+              <FormLabel htmlFor="duration">Duration</FormLabel>
+              <Controller
+                name="duration"
+                control={control}
+                defaultValue="00:03:00"
+                render={({ field }) => (
+                  <Input
+                    {...field}
+                    id="duration"
+                    placeholder="Please enter duration"
+                    type="time"
+                    step="1"
+                    maxW="240px"
+                  />
+                )}
+              />
+              {errors.duration && (
+                <Text fontSize="sm" color="red">
+                  {errors.duration?.message as ReactNode}
                 </Text>
               )}
             </FormControl>

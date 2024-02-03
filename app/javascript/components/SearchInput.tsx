@@ -49,7 +49,7 @@ const SearchInput = (): ReactNode => {
         </InputLeftElement>
         <Input
           ref={ref}
-          placeholder="Search..."
+          placeholder="Search Beans..."
           variant="filled"
           boxShadow="base"
           value={searchText}

@@ -27,7 +27,7 @@ const RecipesList = memo(({ beanId }: Props): ReactNode => {
         alignItems="center"
         mt={5}
       >
-        <Heading fontSize="2xl">Recipes</Heading>
+        <Heading fontSize="2xl">Recipes List</Heading>
       </Flex>
       <Divider mb={5} />
       {isLoading && "Is Loading..."}

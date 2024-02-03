@@ -8,6 +8,7 @@ import NavGrid from "./NavGrid";
 import RecipeDetail from "./RecipeDetail";
 import { useBeanQueryContext } from "./providers/BeanQueryProvider";
 import HeaderGrid from "./HeaderGrid";
+import BreadcrumbContainer from "./BreadcrumbContainer";
 
 const App = (): ReactNode => {
   const { beanQuery, setBeanQuery } = useBeanQueryContext();
