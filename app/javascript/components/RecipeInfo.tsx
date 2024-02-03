@@ -62,7 +62,7 @@ const RecipeInfo = ({ recipe }: Props): ReactNode => {
         </Flex>
       </Flex>
       <Divider mb={5} />
-      <Flex direction={{ base: "column", md: "row" }}>
+      <Flex direction={{ base: "column", lg: "row" }}>
         <Stack divider={<StackDivider />} spacing="4" flex={2} mr={4}>
           <Box>
             <Heading size="sm" textTransform="uppercase">
@@ -115,7 +115,7 @@ const RecipeInfo = ({ recipe }: Props): ReactNode => {
         </Stack>
         <Stack divider={<StackDivider />} spacing="4" flex={3} mr={4}>
           <Box>
-            <Show below="md">
+            <Show below="lg">
               <Divider my="16px"></Divider>
             </Show>
             <Heading size="sm" textTransform="uppercase">

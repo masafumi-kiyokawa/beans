@@ -63,7 +63,7 @@ const AddBeanDrawer = ({ isOpen, onClose }: Props): ReactNode => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <DrawerCloseButton />
           <DrawerHeader borderBottomWidth="1px">Add a new Bean</DrawerHeader>
-          <DrawerBody>
+          <DrawerBody mb={2}>
             <Stack spacing="24px">
               <Box>
                 <FormControl isInvalid={!!errors.name}>

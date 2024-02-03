@@ -35,7 +35,7 @@ const BeanInfo = ({ bean }: Props): ReactNode => {
         </Flex>
       </HStack>
       <Divider mb={5} />
-      <Flex direction={{ base: "column", md: "row" }}>
+      <Flex direction={{ base: "column", lg: "row" }}>
         <Stack divider={<StackDivider />} spacing="4" flex={2} mr={4}>
           <Box>
             <Heading size="xs" textTransform="uppercase">
@@ -80,7 +80,7 @@ const BeanInfo = ({ bean }: Props): ReactNode => {
         </Stack>
         <Stack divider={<StackDivider />} spacing="4" flex={3} mr={4}>
           <Box>
-            <Show below="md">
+            <Show below="lg">
               <Divider my="16px"></Divider>
             </Show>
             <Heading size="xs" textTransform="uppercase">
