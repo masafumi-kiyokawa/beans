@@ -39,18 +39,16 @@ const EditRecipe = ({ recipe, refetch }: Props): ReactNode => {
     getInputProps: getBeanQuantityInputProps,
     getIncrementButtonProps: getBeanQuantityIncrementButtonProps1,
     getDecrementButtonProps: getBeanQuantityDecrementButtonProps1,
-    valueAsNumber: beanQuantityValueAsNumber,
   } = useNumberInput({
     step: 0.1,
     defaultValue: recipe.bean_quantity,
     min: 5,
     max: 50,
     precision: 1,
+    onChange(valueAsString, valueAsNumber) {
+      setValue("bean_quantity", valueAsNumber);
+    },
   });
-
-  useEffect(() => {
-    setValue("bean_quantity", beanQuantityValueAsNumber);
-  }, [beanQuantityValueAsNumber]);
 
   const beanQuantityInput = getBeanQuantityInputProps();
   const beanQuantityInc = getBeanQuantityIncrementButtonProps1();
@@ -60,18 +58,16 @@ const EditRecipe = ({ recipe, refetch }: Props): ReactNode => {
     getInputProps: getTemperetureInputProps,
     getIncrementButtonProps: getTemperetureIncrementButtonProps1,
     getDecrementButtonProps: getTemperetureDecrementButtonProps1,
-    valueAsNumber: temperetureValueAsNumber,
   } = useNumberInput({
     step: 1,
     defaultValue: recipe.tempereture,
     min: 0,
     max: 100,
     precision: 0,
+    onChange(valueAsString, valueAsNumber) {
+      setValue("tempereture", valueAsNumber);
+    },
   });
-
-  useEffect(() => {
-    setValue("tempereture", temperetureValueAsNumber);
-  }, [temperetureValueAsNumber]);
 
   const temperetureInput = getTemperetureInputProps();
   const temperetureInc = getTemperetureIncrementButtonProps1();
@@ -81,18 +77,16 @@ const EditRecipe = ({ recipe, refetch }: Props): ReactNode => {
     getInputProps: getWaterQuantityInputProps,
     getIncrementButtonProps: getWaterQuantityIncrementButtonProps1,
     getDecrementButtonProps: getWaterQuantityDecrementButtonProps1,
-    valueAsNumber: waterQuantityValueAsNumber,
   } = useNumberInput({
     step: 10,
     defaultValue: recipe.water_quantity,
     min: 50,
     max: 1000,
     precision: 0,
+    onChange(valueAsString, valueAsNumber) {
+      setValue("water_quantity", valueAsNumber);
+    },
   });
-
-  useEffect(() => {
-    setValue("water_quantity", waterQuantityValueAsNumber);
-  }, [waterQuantityValueAsNumber]);
 
   const waterQuantityInput = getWaterQuantityInputProps();
   const waterQuantityInc = getWaterQuantityIncrementButtonProps1();
@@ -207,29 +201,29 @@ const EditRecipe = ({ recipe, refetch }: Props): ReactNode => {
           <FormControl isInvalid={!!errors.bean_quantity}>
             <FormLabel htmlFor="bean_quantity">Bean Quantity</FormLabel>{" "}
             <HStack maxW="240px">
-              <InputGroup>
-                <Button {...beanQuantityInc} mr={5}>
-                  +
-                </Button>
-                <Controller
-                  name="bean_quantity"
-                  control={control}
-                  defaultValue={Number(recipe.bean_quantity)}
-                  render={({ field }) => (
+              <Controller
+                name="bean_quantity"
+                control={control}
+                defaultValue={Number(recipe.bean_quantity)}
+                render={({ field }) => (
+                  <InputGroup>
+                    <Button {...beanQuantityInc} mr={5}>
+                      +
+                    </Button>
                     <Input
                       {...field}
                       {...beanQuantityInput}
                       id="bean_quantity"
                     />
-                  )}
-                />
-                <InputRightAddon>
-                  <Center w="10px">g</Center>
-                </InputRightAddon>
-                <Button {...beanQuantityDec} ml={5}>
-                  -
-                </Button>
-              </InputGroup>
+                    <InputRightAddon>
+                      <Center w="10px">g</Center>
+                    </InputRightAddon>
+                    <Button {...beanQuantityDec} ml={5}>
+                      -
+                    </Button>
+                  </InputGroup>
+                )}
+              />
             </HStack>
             {errors.bean_quantity && (
               <Text fontSize="sm" color="red">
