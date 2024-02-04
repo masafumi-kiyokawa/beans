@@ -16,15 +16,15 @@ export const beanValidationSchema = z.object({
       (value) => allowedCountries.includes(value),
       "County name is invalid."
     ),
-  variety: z.string(),
-  process: z.string(),
+  variety: z.string().max(40, "Variety must cotain 40 charactors or less."),
+  process: z.string().max(40, "Process must cotain 40 charactors or less."),
   roast_level: z
     .string()
     .min(1, "Roast level is required.")
     .refine((value) => roast_levels.includes(value), {
       message: "Roast level is invalid.",
     }),
-  producer: z.string(),
-  roaster: z.string(),
-  note: z.string(),
+  producer: z.string().max(40, "Producer must cotain 40 charactors or less."),
+  roaster: z.string().max(40, "Roaster must cotain 40 charactors or less."),
+  note: z.string().max(800, "Note must cotain 800 charactors or less."),
 });
