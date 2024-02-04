@@ -28,10 +28,15 @@ const BeanDetail = (): ReactNode => {
         setTabIndex(index);
         localStorage.setItem('activeTab', String(index));
     };
+
     useEffect(() => {
         const activeTab = localStorage.getItem('activeTab');
-        if (activeTab !== null) setTabIndex(parseInt(activeTab));
-    }, []);
+        if (activeTab !== null) {
+            setTabIndex(parseInt(activeTab));
+        } else {
+            setTabIndex(0);
+        }
+    }, [data]);
 
     if (isError) return <div>Error</div>;
     if (isLoading) return <div>Loading...</div>;

@@ -45,11 +45,12 @@ const AddBeanDrawer = ({ isOpen, onClose }: Props): ReactNode => {
     });
     const onSubmit = (data: Bean): void => {
         axios
-            .post('/api/beans', { bean: data })
-            .then(() => {
+            .post<Bean>('/api/beans', { bean: data })
+            .then((res) => {
                 onClose();
                 reset();
-                navigate(`/beans/${data.id}`);
+                localStorage.removeItem('activeTab');
+                navigate(`/beans/${res.data.id}`);
             })
             .catch((error) => {
                 console.log(error);
@@ -96,7 +97,7 @@ const AddBeanDrawer = ({ isOpen, onClose }: Props): ReactNode => {
                                     <Controller
                                         name="country"
                                         control={control}
-                                        defaultValue=""
+                                        defaultValue="Japan"
                                         render={({ field }) => (
                                             <Select {...field} id="country">
                                                 {countries.map(
@@ -168,7 +169,7 @@ const AddBeanDrawer = ({ isOpen, onClose }: Props): ReactNode => {
                                     <Controller
                                         name="roast_level"
                                         control={control}
-                                        defaultValue=""
+                                        defaultValue="Medium"
                                         render={({ field }) => (
                                             <Select {...field} id="roast_level">
                                                 {roastLevels.map(

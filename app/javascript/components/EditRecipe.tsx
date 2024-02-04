@@ -111,10 +111,10 @@ const EditRecipe = ({ recipe, refetch }: Props): ReactNode => {
     });
     const onSubmit = (data: Recipe): void => {
         axios
-            .put(`/api/recipes/${recipe.id}`, { recipe: data })
-            .then(() => {
+            .put<Recipe>(`/api/recipes/${recipe.id}`, { recipe: data })
+            .then((res) => {
                 refetch();
-                navigate(`/recipes/${recipe.id}`);
+                navigate(`/recipes/${res.data.id}`);
             })
             .catch((error) => {
                 console.log(error);

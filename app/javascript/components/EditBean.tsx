@@ -42,10 +42,10 @@ const EditBean = ({ bean, refetch }: Props): ReactNode => {
     });
     const onSubmit = (data: Bean): void => {
         axios
-            .patch(`/api/beans/${bean.id}`, { bean: data })
-            .then(() => {
+            .patch<Bean>(`/api/beans/${bean.id}`, { bean: data })
+            .then((res) => {
                 refetch();
-                navigate(`/beans/${bean.id}`);
+                navigate(`/beans/${res.data.id}`);
             })
             .catch((error) => {
                 console.log(error);

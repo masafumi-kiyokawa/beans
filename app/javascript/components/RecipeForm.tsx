@@ -103,11 +103,10 @@ const RecipeForm = ({ beanId }: Props): ReactNode => {
     const onSubmit = async (data: Recipe): Promise<void> => {
         try {
             await axios
-                .post('/api/recipes', { bean_id: beanId, recipe: data })
+                .post<Recipe>('/api/recipes', { bean_id: beanId, recipe: data })
                 .then((res) => {
-                    console.log(res.data);
                     reset();
-                    navigate(`/recipes/${data.id}`);
+                    navigate(`/recipes/${res.data.id}`);
                 });
         } catch {
             throw new Error('Failed to create bean.');
