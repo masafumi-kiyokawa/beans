@@ -1,12 +1,12 @@
-import { Box } from "@chakra-ui/react";
-import React from "react";
-import type { ReactNode } from "react";
+import { Box } from '@chakra-ui/react';
+import React from 'react';
+import type { ReactNode } from 'react';
 
 interface Props {
-  children: ReactNode;
+    children: ReactNode;
 }
-const RecipesCardContainer = ({ children }: Props): ReactNode => {
-  return <Box mb={5}>{children}</Box>;
-};
+const RecipesCardContainer = ({ children }: Props): ReactNode => (
+    <Box mb={5}>{children}</Box>
+);
 
 export default RecipesCardContainer;

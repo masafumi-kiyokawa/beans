@@ -1,17 +1,15 @@
-import React from "react";
-import type { ReactNode } from "react";
-import { Box } from "@chakra-ui/react";
+import React from 'react';
+import type { ReactNode } from 'react';
+import { Box } from '@chakra-ui/react';
 
 interface Props {
-  children: ReactNode;
+    children: ReactNode;
 }
 
-const BeansCardContainer = ({ children }: Props): ReactNode => {
-  return (
+const BeansCardContainer = ({ children }: Props): ReactNode => (
     <Box mb={5} mx={5}>
-      {children}
+        {children}
     </Box>
-  );
-};
+);
 
 export default BeansCardContainer;
