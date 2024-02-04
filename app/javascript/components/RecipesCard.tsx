@@ -12,6 +12,8 @@ import {
   Stack,
   StackDivider,
   Flex,
+  Show,
+  Divider,
 } from "@chakra-ui/react";
 import { Link as ReactRouterLink } from "react-router-dom";
 
@@ -40,7 +42,7 @@ const RecipesCard = ({ recipe }: Props): ReactNode => {
         </ChakraLink>
       </CardHeader>
       <CardBody>
-        <Flex>
+        <Flex direction={{ base: "column", lg: "row" }}>
           <Stack divider={<StackDivider />} spacing="4" flex={2} mr={4}>
             <Box>
               <Heading size="xs" textTransform="uppercase">
@@ -68,10 +70,13 @@ const RecipesCard = ({ recipe }: Props): ReactNode => {
             </Box>
           </Stack>
           <Box flex={3} mr={4}>
+            <Show below="lg">
+              <Divider my="16px"></Divider>
+            </Show>
             <Heading size="xs" textTransform="uppercase">
               Note
             </Heading>
-            <Text pt="2" fontSize="sm">
+            <Text pt="2" fontSize="sm" whiteSpace="pre-wrap">
               {recipe.note}
             </Text>
           </Box>
