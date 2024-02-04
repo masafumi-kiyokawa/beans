@@ -156,7 +156,7 @@ const RecipeForm = ({ beanId }: Props): ReactNode => {
                         <Controller
                             name="grind"
                             control={control}
-                            defaultValue=""
+                            defaultValue="Medium"
                             render={({ field }) => (
                                 <Select {...field} id="grind" maxW="240px">
                                     {grindSizes.map(
@@ -328,7 +328,9 @@ const RecipeForm = ({ beanId }: Props): ReactNode => {
                             )}
                         />
                         {errors.note != null && (
-                            <Text>{errors.note.message}</Text>
+                            <Text fontSize="sm" color="red">
+                                {errors.note.message}
+                            </Text>
                         )}
                     </FormControl>
                 </Box>

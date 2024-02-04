@@ -84,7 +84,7 @@ const AddBeanDrawer = ({ isOpen, onClose }: Props): ReactNode => {
                                     />
                                     {errors.name != null && (
                                         <Text fontSize="sm" color="red">
-                                            {errors.name.message as ReactNode}
+                                            {errors.name.message}
                                         </Text>
                                     )}
                                 </FormControl>
@@ -115,10 +115,7 @@ const AddBeanDrawer = ({ isOpen, onClose }: Props): ReactNode => {
                                     />
                                     {errors.country != null && (
                                         <Text fontSize="sm" color="red">
-                                            {
-                                                errors.country
-                                                    .message as ReactNode
-                                            }
+                                            {errors.country.message}
                                         </Text>
                                     )}
                                 </FormControl>
@@ -138,7 +135,9 @@ const AddBeanDrawer = ({ isOpen, onClose }: Props): ReactNode => {
                                     )}
                                 />
                                 {errors.variety != null && (
-                                    <Text>{errors.variety.message}</Text>
+                                    <Text fontSize="sm" color="red">
+                                        {errors.variety.message}
+                                    </Text>
                                 )}
                             </Box>
                             <Box>
@@ -156,7 +155,9 @@ const AddBeanDrawer = ({ isOpen, onClose }: Props): ReactNode => {
                                     )}
                                 />
                                 {errors.process != null && (
-                                    <Text>{errors.process.message}</Text>
+                                    <Text fontSize="sm" color="red">
+                                        {errors.process.message}
+                                    </Text>
                                 )}
                             </Box>
                             <Box>
@@ -187,10 +188,7 @@ const AddBeanDrawer = ({ isOpen, onClose }: Props): ReactNode => {
                                     />
                                     {errors.roast_level != null && (
                                         <Text fontSize="sm" color="red">
-                                            {
-                                                errors.roast_level
-                                                    .message as ReactNode
-                                            }
+                                            {errors.roast_level.message}
                                         </Text>
                                     )}
                                 </FormControl>
@@ -215,7 +213,9 @@ const AddBeanDrawer = ({ isOpen, onClose }: Props): ReactNode => {
                                         )}
                                     />
                                     {errors.producer != null && (
-                                        <Text>{errors.producer.message}</Text>
+                                        <Text fontSize="sm" color="red">
+                                            {errors.producer.message}
+                                        </Text>
                                     )}
                                 </FormControl>
                             </Box>
@@ -237,7 +237,9 @@ const AddBeanDrawer = ({ isOpen, onClose }: Props): ReactNode => {
                                         )}
                                     />
                                     {errors.roaster != null && (
-                                        <Text>{errors.roaster.message}</Text>
+                                        <Text fontSize="sm" color="red">
+                                            {errors.roaster.message}
+                                        </Text>
                                     )}
                                 </FormControl>
                             </Box>
@@ -253,7 +255,9 @@ const AddBeanDrawer = ({ isOpen, onClose }: Props): ReactNode => {
                                         )}
                                     />
                                     {errors.note != null && (
-                                        <Text>{errors.note.message}</Text>
+                                        <Text fontSize="sm" color="red">
+                                            {errors.note.message}
+                                        </Text>
                                     )}
                                 </FormControl>
                             </Box>

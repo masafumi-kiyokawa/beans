@@ -352,7 +352,9 @@ const EditRecipe = ({ recipe, refetch }: Props): ReactNode => {
                             )}
                         />
                         {errors.note != null && (
-                            <Text>{errors.note.message}</Text>
+                            <Text fontSize="sm" color="red">
+                                {errors.note.message}
+                            </Text>
                         )}
                     </FormControl>
                 </Box>

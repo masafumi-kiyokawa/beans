@@ -51,7 +51,7 @@ const BeanDetail = (): ReactNode => {
                 mt={20}
                 px="16px"
             >
-                <Heading fontSize="3xl">{data?.name}</Heading>
+                <Heading fontSize="3xl">{data.name}</Heading>
             </Flex>
             <Tabs
                 p="16px"
