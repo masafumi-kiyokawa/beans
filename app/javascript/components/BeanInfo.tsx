@@ -102,7 +102,7 @@ const BeanInfo = ({ bean }: Props): ReactNode => {
             <Heading size="xs" textTransform="uppercase">
               Note
             </Heading>
-            <Text pt="2" fontSize="sm">
+            <Text pt="2" fontSize="sm" whiteSpace="pre-wrap">
               {bean.note}
             </Text>
           </Box>

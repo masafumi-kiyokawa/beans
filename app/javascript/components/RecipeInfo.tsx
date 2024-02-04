@@ -29,9 +29,13 @@ const RecipeInfo = ({ recipe }: Props): ReactNode => {
   };
   const formatDate = (target: string): string => {
     const date = new Date(target);
-    const year = String(date.getUTCFullYear());
-    const month = String(date.getUTCMonth());
-    const day = String(date.getUTCDay());
+    const year = new Intl.DateTimeFormat("en", { year: "numeric" }).format(
+      date
+    );
+    const month = new Intl.DateTimeFormat("en", { month: "2-digit" }).format(
+      date
+    );
+    const day = new Intl.DateTimeFormat("en", { day: "2-digit" }).format(date);
     return `${year}/${month}/${day}`;
   };
 
@@ -137,7 +141,7 @@ const RecipeInfo = ({ recipe }: Props): ReactNode => {
             <Heading size="sm" textTransform="uppercase">
               Note
             </Heading>
-            <Text pt="2" fontSize="md">
+            <Text pt="2" fontSize="md" whiteSpace="pre-wrap">
               {recipe.note}
             </Text>
           </Box>

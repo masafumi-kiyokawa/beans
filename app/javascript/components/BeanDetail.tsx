@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import type { ReactNode } from "react";
 import { Route, Routes, useParams } from "react-router-dom";
 import {
@@ -18,6 +18,16 @@ import RecipesList from "./RecipesList";
 import EditBean from "./EditBean";
 
 const BeanDetail = (): ReactNode => {
+  const [tabIndex, setTabIndex] = useState(0);
+  const handleTabsChange = (index: number) => {
+    setTabIndex(index);
+    localStorage.setItem("activeTab", String(index));
+  };
+  useEffect(() => {
+    const activeTab = localStorage.getItem("activeTab");
+    activeTab && setTabIndex(parseInt(activeTab));
+  }, []);
+
   const { id } = useParams();
   if (id === undefined) return <div>error</div>;
   const { data, isError, isLoading, refetch } = useQuery({
@@ -39,7 +49,12 @@ const BeanDetail = (): ReactNode => {
       >
         <Heading fontSize="3xl">{data?.name}</Heading>
       </Flex>
-      <Tabs p="16px" colorScheme="white">
+      <Tabs
+        p="16px"
+        colorScheme="white"
+        index={tabIndex}
+        onChange={handleTabsChange}
+      >
         <TabList>
           <Tab>Bean Info</Tab>
           <Tab>Recipes List</Tab>
@@ -55,10 +70,10 @@ const BeanDetail = (): ReactNode => {
               <Route path="/*" element={<BeanInfo bean={data} />} />
             </Routes>
           </TabPanel>
-          <TabPanel>
+          <TabPanel pr={0}>
             <RecipesList beanId={data.id} />
           </TabPanel>
-          <TabPanel>
+          <TabPanel pr={0}>
             <RecipeForm beanId={data.id} />
           </TabPanel>
         </TabPanels>
