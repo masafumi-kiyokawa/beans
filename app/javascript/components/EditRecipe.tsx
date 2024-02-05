@@ -9,10 +9,6 @@ import {
     Text,
     Input,
     HStack,
-    useNumberInput,
-    Center,
-    InputGroup,
-    InputRightAddon,
     Divider,
     Flex,
     Heading,
@@ -26,6 +22,9 @@ import { useNavigate } from 'react-router-dom';
 import type { Recipe } from './types/Recipe';
 import { recipeValidationSchema } from '../validation/recipeVaildationSchema';
 import grindSizes from '../data/grind_sizes';
+import BeanQuantityInput from './BeanQuantityInput';
+import WaterQuantityInput from './WaterQuantityInput';
+import TemperetureInput from './TemperetureInput';
 
 interface Props {
     recipe: Recipe;
@@ -33,63 +32,6 @@ interface Props {
 }
 
 const EditRecipe = ({ recipe, refetch }: Props): ReactNode => {
-    const {
-        getInputProps: getBeanQuantityInputProps,
-        getIncrementButtonProps: getBeanQuantityIncrementButtonProps1,
-        getDecrementButtonProps: getBeanQuantityDecrementButtonProps1,
-    } = useNumberInput({
-        step: 0.1,
-        defaultValue: recipe.bean_quantity,
-        min: 5,
-        max: 50,
-        precision: 1,
-        onChange(valueAsString, valueAsNumber) {
-            setValue('bean_quantity', valueAsNumber);
-        },
-    });
-
-    const beanQuantityInput = getBeanQuantityInputProps();
-    const beanQuantityInc = getBeanQuantityIncrementButtonProps1();
-    const beanQuantityDec = getBeanQuantityDecrementButtonProps1();
-
-    const {
-        getInputProps: getTemperetureInputProps,
-        getIncrementButtonProps: getTemperetureIncrementButtonProps1,
-        getDecrementButtonProps: getTemperetureDecrementButtonProps1,
-    } = useNumberInput({
-        step: 1,
-        defaultValue: recipe.tempereture,
-        min: 0,
-        max: 100,
-        precision: 0,
-        onChange(valueAsString, valueAsNumber) {
-            setValue('tempereture', valueAsNumber);
-        },
-    });
-
-    const temperetureInput = getTemperetureInputProps();
-    const temperetureInc = getTemperetureIncrementButtonProps1();
-    const temperetureDec = getTemperetureDecrementButtonProps1();
-
-    const {
-        getInputProps: getWaterQuantityInputProps,
-        getIncrementButtonProps: getWaterQuantityIncrementButtonProps1,
-        getDecrementButtonProps: getWaterQuantityDecrementButtonProps1,
-    } = useNumberInput({
-        step: 10,
-        defaultValue: recipe.water_quantity,
-        min: 50,
-        max: 1000,
-        precision: 0,
-        onChange(valueAsString, valueAsNumber) {
-            setValue('water_quantity', valueAsNumber);
-        },
-    });
-
-    const waterQuantityInput = getWaterQuantityInputProps();
-    const waterQuantityInc = getWaterQuantityIncrementButtonProps1();
-    const waterQuantityDec = getWaterQuantityDecrementButtonProps1();
-
     const navigate = useNavigate();
 
     const formatDuration = (duration: string): string => {
@@ -103,7 +45,6 @@ const EditRecipe = ({ recipe, refetch }: Props): ReactNode => {
     const {
         control,
         handleSubmit,
-        setValue,
         formState: { errors },
     } = useForm<Recipe>({
         mode: 'onChange',
@@ -210,22 +151,10 @@ const EditRecipe = ({ recipe, refetch }: Props): ReactNode => {
                                 control={control}
                                 defaultValue={Number(recipe.bean_quantity)}
                                 render={({ field }) => (
-                                    <InputGroup>
-                                        <Button {...beanQuantityInc} mr={5}>
-                                            +
-                                        </Button>
-                                        <Input
-                                            {...field}
-                                            {...beanQuantityInput}
-                                            id="bean_quantity"
-                                        />
-                                        <InputRightAddon>
-                                            <Center w="10px">g</Center>
-                                        </InputRightAddon>
-                                        <Button {...beanQuantityDec} ml={5}>
-                                            -
-                                        </Button>
-                                    </InputGroup>
+                                    <BeanQuantityInput
+                                        defaultValue={recipe.bean_quantity}
+                                        {...field}
+                                    />
                                 )}
                             />
                         </HStack>
@@ -246,24 +175,10 @@ const EditRecipe = ({ recipe, refetch }: Props): ReactNode => {
                             control={control}
                             defaultValue={recipe.tempereture}
                             render={({ field }) => (
-                                <HStack maxW="240px">
-                                    <InputGroup>
-                                        <Button {...temperetureInc} mr={5}>
-                                            +
-                                        </Button>
-                                        <Input
-                                            {...field}
-                                            {...temperetureInput}
-                                            id="tempereture"
-                                        />
-                                        <InputRightAddon>
-                                            <Center w="10px">°C</Center>
-                                        </InputRightAddon>
-                                        <Button {...temperetureDec} ml={5}>
-                                            -
-                                        </Button>
-                                    </InputGroup>
-                                </HStack>
+                                <TemperetureInput
+                                    {...field}
+                                    defaultValue={recipe.tempereture}
+                                />
                             )}
                         />
                         {errors.tempereture != null && (
@@ -283,24 +198,10 @@ const EditRecipe = ({ recipe, refetch }: Props): ReactNode => {
                             control={control}
                             defaultValue={recipe.water_quantity}
                             render={({ field }) => (
-                                <HStack maxW="240px">
-                                    <InputGroup>
-                                        <Button {...waterQuantityInc} mr={5}>
-                                            +
-                                        </Button>
-                                        <Input
-                                            {...field}
-                                            {...waterQuantityInput}
-                                            id="water_quantity"
-                                        />
-                                        <InputRightAddon>
-                                            <Center w="10px">g</Center>
-                                        </InputRightAddon>
-                                        <Button {...waterQuantityDec} ml={5}>
-                                            -
-                                        </Button>
-                                    </InputGroup>
-                                </HStack>
+                                <WaterQuantityInput
+                                    defaultValue={recipe.water_quantity}
+                                    {...field}
+                                />
                             )}
                         />
                         {errors.water_quantity != null && (

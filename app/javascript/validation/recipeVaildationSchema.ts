@@ -9,7 +9,7 @@ export const recipeValidationSchema = z.object({
         .min(4, 'Title must contain at least 4 charactors.')
         .max(40, 'Title must cotain 40 charactors or less.'),
     bean_quantity: z
-        .number()
+        .number({ invalid_type_error: 'Bean quantity is required.' })
         .gte(5.0, 'Bean quantity must be greater than 5.0.')
         .lte(50.0, 'Bean quantity must be greater than 50.0.')
         .refine((value) => value !== undefined, 'Bean quantity is required.'),
@@ -24,7 +24,7 @@ export const recipeValidationSchema = z.object({
         .string()
         .refine((value) => timeRegex.test(value), 'Invalid time format.'),
     tempereture: z
-        .number()
+        .number({ invalid_type_error: 'Tempereture is required.' })
         .gte(0, 'Water tempereture must be greater than 0.')
         .lte(100, 'Water tempereture must be greater than 100.')
         .refine(
@@ -32,7 +32,7 @@ export const recipeValidationSchema = z.object({
             'Water tempereture is required.',
         ),
     water_quantity: z
-        .number()
+        .number({ invalid_type_error: 'Water quantity is required.' })
         .gte(50, 'Water quantity must be greater than 50.')
         .lte(1000, 'Water quantity must be greater than 1000.')
         .refine((value) => value !== undefined, 'Water quantity is required.'),

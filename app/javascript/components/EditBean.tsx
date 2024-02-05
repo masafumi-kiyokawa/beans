@@ -256,7 +256,12 @@ const EditBean = ({ bean, refetch }: Props): ReactNode => {
                             control={control}
                             defaultValue={bean.note}
                             render={({ field }) => (
-                                <Textarea {...field} id="note" maxW="45em" />
+                                <Textarea
+                                    {...field}
+                                    id="note"
+                                    h={200}
+                                    maxW="45em"
+                                />
                             )}
                         />
                         {errors.note != null && (

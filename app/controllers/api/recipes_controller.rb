@@ -53,7 +53,7 @@ module Api
     end
 
     def update
-      if Recipe.update(recipe_params)
+      if @recipe.update(recipe_params)
         render json: @recipe, status: :ok
       else
         render json: @recipe.errors, status: :unprocessable_entity
