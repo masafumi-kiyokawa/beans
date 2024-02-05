@@ -44,7 +44,7 @@ const TemperetureInput = forwardRef(
                     </Button>
                     <Input {...input} />
                     <InputRightAddon>
-                        <Center w="10px">g</Center>
+                        <Center w="10px">°C</Center>
                     </InputRightAddon>
                     <Button {...dec} ml={5}>
                         -
