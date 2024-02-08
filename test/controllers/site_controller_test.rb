@@ -1,8 +1,8 @@
 require "test_helper"
 
-class HomeControllerTest < ActionDispatch::IntegrationTest
+class SiteControllerTest < ActionDispatch::IntegrationTest
   test "should get index" do
-    get home_index_url
+    get "/api/beans"
     assert_response :success
   end
 end
