@@ -69,4 +69,6 @@ group :test do
   gem "selenium-webdriver"
   gem "minitest"
   gem "minitest-reporters"
+  gem "guard"
+  gem "guard-minitest"
 end
